@@ -15,21 +15,14 @@ function parse_url() {
 }
 
 function load_page(file) {
-  //$( ".navbar a" ).click(function() {
     var jqxhr = $.get( file, function(data) {
       $( "#content" ).fadeOut(200, function() {
         $( "#content" ).html(data);
         $( "#content" ).fadeIn(299)
 
       })
-
-
-
     })
-      .fail(function() {
-        $( "#content" ).html("Error while loading data. Please try again later");
-
-      })
-
-  //});
+    .fail(function() {
+      $( "#content" ).html("Error while loading data. Please try again later");
+    })
 }
