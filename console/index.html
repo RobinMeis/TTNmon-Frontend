@@ -51,10 +51,9 @@
             <span class="nav-link-text">My Authorization</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li><a href="#signin">Sign in</a></li>
+            <li id="signinButton"><a href="#signin">Sign in</a></li>
             <li><a href="#getauthkey">Get Authorization Key</a></li>
             <li><a href="cards.html">Devices</a></li>
-            <li><a href="cards.html">Register new device</a></li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
@@ -135,8 +134,8 @@
             </div>
           </form>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <li id="logoutModalButton" class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
@@ -160,19 +159,21 @@
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="logoutModalLabel">Ready to Leave?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">
+            <div class="alert alert-warning">Did you save your authorization key? If not, please <a href="#getauthkey" onclick="$('#logoutModal').modal('hide')">return</a></div>
+            Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <button class="btn btn-primary" id="signoutButton">Logout</button>
           </div>
         </div>
       </div>

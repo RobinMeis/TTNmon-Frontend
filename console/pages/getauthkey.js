@@ -4,9 +4,10 @@ function getauthkey() {
       auth_key = $.parseJSON( data );
       $("#auth_key").val(auth_key["auth_token"]);
       Cookies.set('auth_key', auth_key["auth_token"], { expires: 365, path: '' });
+      $("#signinButton").hide();
+      $("#logoutModalButton").show();
     });
   } else //Use existing key
     $("#auth_key").val(Cookies.get('auth_key'));
-
   $( "#content" ).fadeIn(200);
 }
