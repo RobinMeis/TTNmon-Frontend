@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">TTNmon</a>
+    </li>
+    <li class="breadcrumb-item">My Authorization</li>
+    <li class="breadcrumb-item active">Get Authorization Key</li>
+  </ol>
+  <!-- Introduction-->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fa fa-key"></i> Authorization Key</div>
+    <div class="card-body">
+      <p>Below you can see your authorization key. Please go to <a target="_blank" href="https://console.thethingsnetwork.org/applications">TTN application console</a> and add a new HTTP integration. Please enter the following data:</p>
+      <div class="form-group">
+        <label for="access_key">Access Key</label>
+        <input id="access_key" class="form-control" type="text" value="Choose an access key. Access to devices is required" readonly>
+
+        <label for="url">URL</label>
+        <input id="url" class="form-control" type="text" value="https://ttnmon.meis.space/webhook/" readonly>
+
+        <label for="method">Method</label>
+        <input id="method" class="form-control" type="text" value="POST" readonly>
+
+        <label for="auth_key">Authorization</label>
+        <input id="auth_key" class="form-control" type="text" value="Generating Authorization failed. Please reload page" readonly>
+        Custom headers are not required
+      </div>
+      <div class="alert alert-warning">
+        <p>You have been signed in using your authorization key. Please store your key at a save place. There is no way to recover lost keys. Devices sending data to TTNmon using your authorization will be added to your key. If you lose your key, you'll need to ask for device removal or register new DevEUIs</p>
+        Your key is required to:
+        <ul>
+          <li>Send data to TTNmon</li>
+          <li>Remove devices from TTNmon</li>
+          <li>Sign into this website</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-footer small text-muted">Thanks for storing your key at a save place!</div>
+  </div>
+</div>
