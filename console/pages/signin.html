@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">TTNmon</a>
+    </li>
+    <li class="breadcrumb-item">My Authorization</li>
+    <li class="breadcrumb-item active">Sign in</li>
+  </ol>
+
+  <div id="signin-alert" class="alert">NO MSG</div>
+
+  <div id="signin-mask" class="card mb-3">
+    <div class="card-header">
+      <i class="fa fa-sign-in"></i> Sign in</div>
+    <div class="card-body">
+      <p>Please sign in using your <strong>authorization key</strong>. If you don't have an authorization key yet, you can <a href="#getauthkey">create a new key</a>.</p>
+      <div class="form-group">
+        <form id='loginForm' action='#signin'>
+          <input class="form-control" id="auth_key" type="password" placeholder="Enter Authorization Key"><br>
+          <button class="btn btn-primary btn-block" id='loginButton' type='button'>Login</button>
+        </form>
+      </div>
+      <div class="alert alert-info">
+        If you lost your key, you'll need to ask for device removal or register new DevEUIs. Please remember that you might find it in your TTN HTTP intergration for TTNmon. It is recommended to store your key in your browsers password manager
+      </div>
+    </div>
+  </div>
+</div>

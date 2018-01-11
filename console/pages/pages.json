@@ -1,5 +1,6 @@
 {
   "#startpage": {"javascript": "defaultpage", "html": "pages/startpage.html"},
   "#imprint": {"javascript": "defaultpage", "html": "pages/imprint.html"},
-  "#getauthkey": {"javascript": "getauthkey", "html": "pages/getauthkey.html"}
+  "#getauthkey": {"javascript": "getauthkey", "html": "pages/getauthkey.html"},
+  "#signin": {"javascript": "signin", "html": "pages/signin.html"}
 }
