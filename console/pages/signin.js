@@ -1,10 +1,10 @@
 $(document).ready(function() {
   $("#signoutButton").click(sign_out);
   if (Cookies.get('auth_key') != undefined) {
-    $("#signinButton").hide();
-    $("#logoutModalButton").show();
+    $(".showloggedout").hide();
+    $(".showloggedin").show();
   } else {
-    $("#logoutModalButton").hide();
+    $(".showloggedin").hide();
   }
 });
 
@@ -20,8 +20,8 @@ function signin() { //Runs on each page load
     $("#signin-alert").removeClass("alert-danger");
     $("#signin-alert").addClass("alert-success");
     $("#signin-alert").html("You are already Signed in. To sign in using another authorization key, please sign out first");
-    $("#signinButton").hide();
-    $("#logoutModalButton").show();
+    $(".showloggedout").hide();
+    $(".showloggedin").show();
   }
 }
 
@@ -34,8 +34,8 @@ function signin_check(){ //Checks auth key
       $("#signin-alert").html("You have been successfully signed in. Please consider to store your key using your browsers password manager");
       $("#signin-alert").fadeIn();
       $("#signin-mask").hide();
-      $("#signinButton").hide();
-      $("#logoutModalButton").show();
+      $(".showloggedout").hide();
+      $(".showloggedin").show();
       $('#loginForm').submit();
     } else {
       $("#signin-alert").removeClass("alert-success");
@@ -53,8 +53,8 @@ function key_check(e) { //handles pressing enther in input field
 
 function sign_out() {
   Cookies.remove('auth_key', { path: '' });
-  $("#signinButton").show();
-  $("#logoutModalButton").hide();
+  $(".showloggedout").show();
+  $(".showloggedin").hide();
   window.location.replace("#")
   $('#logoutModal').modal('toggle');
 }
