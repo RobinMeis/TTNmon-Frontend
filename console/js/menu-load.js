@@ -12,25 +12,28 @@ window.onhashchange = function(){
 }
 
 function parse_url() {
-  if (window.location.hash == "" || window.location.hash == "#")
-    load_page(json_pages["#startpage"]);
+  hash = window.location.hash.split("-");
+  if (hash[0] == "" || hash[0] == "#")
+    load_page(json_pages["#startpage"], hash);
   else
-    if (json_pages[window.location.hash] != undefined)
-      load_page(json_pages[window.location.hash]);
+    if (json_pages[hash[0]] != undefined)
+      load_page(json_pages[hash[0]], hash);
     else
       $( "#content" ).html("Sorry, file not found");
 }
 
-function load_page(file) {
-    $.get( file["html"], function(data) {
-      $( "#content" ).fadeOut(200, function() {
-        $( "#content" ).html(data);
-        window[file["javascript"]]();
+function load_page(file, hash) {
+  if (file["html"] != "null") {
+      $.get( file["html"], function(data) {
+        $( "#content" ).fadeOut(200, function() {
+          $( "#content" ).html(data);
+          window[file["javascript"]](hash);
+        });
       })
-    })
-    .fail(function() {
-      $( "#content" ).html("Error while loading data. Please try again later");
-    })
+      .fail(function() {
+        $( "#content" ).html("Error while loading data. Please try again later");
+      });
+    }
 }
 
 function defaultpage() {

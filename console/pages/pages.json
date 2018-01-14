@@ -3,5 +3,6 @@
   "#imprint": {"javascript": "defaultpage", "html": "pages/imprint.html"},
   "#getauthkey": {"javascript": "getauthkey", "html": "pages/getauthkey.html"},
   "#signin": {"javascript": "signin", "html": "pages/signin.html"},
-  "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html"}
+  "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html"},
+  "#search": {"javascript": "search_dummy", "html": "null"}
 }
