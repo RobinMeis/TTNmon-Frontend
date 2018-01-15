@@ -15,8 +15,9 @@ function device(hash) {
     $("#date_start").datepicker(options);
     $("#date_end").datepicker(options);
 
-    var start = new Date(); //Set dates
-    var end = new Date();
+    var now = new Date();
+    var start = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()); //Set dates
+    var end = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
     start.setMonth(start.getMonth() - 1);
     $('#date_start').datepicker("setDate", start);
     $('#date_end').datepicker("setDate", end);
