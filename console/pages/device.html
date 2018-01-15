@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">TTNmon</a>
+    </li>
+    <li class="breadcrumb-item active">Device</li>
+  </ol>
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">Welcome to TTNmon</div>
+        <div class="card-body">
+          TTNmon is currently &beta;. Take a look around but don't expect too much.
+        </div>
+        <div class="card-footer small text-muted">14.01.2018 - 02:11</div>
+      </div>
+      <!-- /Card Columns-->
+    </div>
+    <div class="col-lg-4">
+      <!-- datepicker Card-->
+      <div class="card mb-3">
+        <div class="card-header"><i class="fa fa-calendar"></i> Date Range</div>
+        <div class="list-group list-group-flush small">
+        </div>
+      </div>
+      <!-- Packet stats Card-->
+      <div class="card mb-3">
+        <div class="card-header"><i class="fa fa-line-chart"></i> Packet Stats</div>
+        <div class="list-group list-group-flush small">
+          <div class="list-group-item list-group-item-action">
+            <div class="media">
+              <div class="media-body">
+                <strong>Spreading Factor</strong><br>
+                Min: <span id="SF_min"></span><br>
+                Max: <span id="SF_max"></span>
+              </div>
+            </div>
+          </div>
+          <div class="list-group-item list-group-item-action">
+            <div class="media">
+              <div class="media-body">
+                <strong>Packets</strong><br>
+                <span id="packets"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Gateways Card-->
+      <div class="card mb-3">
+        <div class="card-header"><i class="fa fa-wifi"></i> Gateways</div>
+        <div id="gateways" class="list-group list-group-flush small">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
