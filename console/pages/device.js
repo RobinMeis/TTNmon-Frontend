@@ -3,14 +3,16 @@ function device(hash) {
     $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Invalid device request</div></div>");
     $("#content").fadeIn(200);
   } else {
-    var options={
+    $("#pseudonym_id").text(hash[1]);
+
+    var options={ //Configure datepickers
       format: 'dd.mm.yyyy',
       todayHighlight: true,
       autoclose: true,
       weekStart: 1,
     };
 
-    $("#date_start").datepicker(options); //Configure datepickers
+    $("#date_start").datepicker(options);
     $("#date_end").datepicker(options);
 
     var start = new Date(); //Set dates
@@ -42,33 +44,41 @@ function get_packets(dev_pseudonym, date_start, date_end) {
   date_end.setSeconds(59);
   var string_start = date_start.getFullYear() + "-" + (date_start.getMonth() + 1) + "-" + date_start.getDate();
   var string_end = date_end.getFullYear() + "-" + (date_end.getMonth() + 1) + "-" + date_end.getDate() + " " + date_end.getHours() + ":" + date_end.getMinutes() + ":" + date_end.getSeconds();
-  $.getJSON( "https://ttnmon.meis.space/api/packet/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end, function( data ) {
-    $("#update_date").hide();
-    $("#SF_min").text(data["packet_stats"]["SF_min"]); //packet stats
-    $("#SF_max").text(data["packet_stats"]["SF_max"]);
-    $("#packets").text(data["packet_stats"]["packets"]);
+  $.getJSON( "https://ttnmon.meis.space/api/packet/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end)
+  .done( function( data ) {
+    if (data["error"] != 0) {
+      $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">" + data["msg_en"] + "</div></div>");
+    } else {
+      $("#update_date").hide();
+      $("#SF_min").text(data["packet_stats"]["SF_min"]); //packet stats
+      $("#SF_max").text(data["packet_stats"]["SF_max"]);
+      $("#packets").text(data["packet_stats"]["packets"]);
 
-    $("#gateways").html("");
-    $.each(data["gateways"], function(key, gateway) {
-      $("#gateways").append('<a class="list-group-item list-group-item-action" href="#"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"] + ' | ' + gateway["alt"] + 'm</div></div></div></a>')
-    });
+      $("#gateways").html("");
+      $.each(data["gateways"], function(key, gateway) {
+        $("#gateways").append('<a class="list-group-item list-group-item-action" href="#"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"] + ' | ' + gateway["alt"] + 'm</div></div></div></a>')
+      });
 
-    spreading_factor = []; //Prepare graphs
-  	frequency = [];
-  	packet_count = [];
-  	$.each(data["packets"], function (index, packet) {
-  		date = Date.parse(packet["time"])
-  		spreading_factor.push([date, packet["SF"]]);
-  		frequency.push([date, packet["frequency"]]);
-  		packet_count.push([date, packet["packet_count"]]);
+      spreading_factor = []; //Prepare graphs
+    	frequency = [];
+    	packet_count = [];
+    	$.each(data["packets"], function (index, packet) {
+    		date = Date.parse(packet["time"])
+    		spreading_factor.push([date, packet["SF"]]);
+    		frequency.push([date, packet["frequency"]]);
+    		packet_count.push([date, packet["packet_count"]]);
 
-  	});
+    	});
 
-    graph_frequency(frequency); //Generate graphs
-    graph_spreading_factor(spreading_factor);
-    graph_packet_count(packet_count);
-
+      graph_frequency(frequency); //Generate graphs
+      graph_spreading_factor(spreading_factor);
+      graph_packet_count(packet_count);
+    }
     $( "#content" ).fadeIn(200);
+  })
+  .fail( function() {
+    $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Connection error. Please try again later</div></div>");
+    $("#content").fadeIn(200);
   });
 }
 
@@ -132,7 +142,7 @@ function graph_spreading_factor(data) {
       },
       yAxis: {
           title: {
-              text: 'Spreding Factor'
+              text: 'Spreading Factor'
           }
       },
       legend: {
