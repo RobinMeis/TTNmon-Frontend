@@ -4,5 +4,6 @@
   "#getauthkey": {"javascript": "getauthkey", "html": "pages/getauthkey.html"},
   "#signin": {"javascript": "signin", "html": "pages/signin.html"},
   "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html"},
-  "#search": {"javascript": "search_dummy", "html": "null"}
+  "#search": {"javascript": "search_dummy", "html": "null"},
+  "#device": {"javascript": "device", "html": "pages/device.html"}
 }
