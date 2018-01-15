@@ -3,15 +3,26 @@ function device(hash) {
     $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Invalid device request</div></div>");
     $("#content").fadeIn(200);
   } else {
-    var date_input=$('input[name="date"]'); //our date input has the name "date"
-var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-var options={
-  format: 'mm/dd/yyyy',
-  container: container,
-  todayHighlight: true,
-  autoclose: true,
-};
-date_input.datepicker(options);
+    var options={
+      format: 'dd.mm.yyyy',
+      todayHighlight: true,
+      autoclose: true,
+      weekStart: 1,
+    };
+    $("#date_start").datepicker(options)
+      .on("changeDate", function(e) {
+        $('#date_end').datepicker("setStartDate", e.date);
+      });
+
+    $("#date_end").datepicker(options)
+    .on("changeDate", function(e) {
+      $('#date_start').datepicker("setEndDate", e.date);
+    });
+
+    var start = new Date();
+    start.setMonth(start.getMonth() - 1);
+    $('#date_start').datepicker("setDate", start);
+    $('#date_end').datepicker("setDate", Date());
 
     $.getJSON( "https://ttnmon.meis.space/api/packet/?dev_pseudonym=" + hash[1] + "&date_start=2018-01-01 00:00:00&date_end=2018-12-31 23:59:59", function( data ) {
       $("#SF_min").text(data["packet_stats"]["SF_min"]); //packet stats
