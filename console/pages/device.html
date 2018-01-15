@@ -9,6 +9,21 @@
   <div class="row">
     <div class="col-lg-9">
       <!-- Graphing -->
+      <div class="card mb-3 gtw_graph">
+        <div class="card-header">Gateway RSSI (<span class="gtw_id"></span>)</div>
+        <div class="card-body" id="chart_rssi_gtw">
+        </div>
+      </div>
+      <div class="card mb-3 gtw_graph">
+        <div class="card-header">Gateway SNR (<span class="gtw_id"></span>)</div>
+        <div class="card-body" id="chart_snr_gtw">
+        </div>
+      </div>
+      <div class="card mb-3 gtw_graph">
+        <div class="card-header">Gateway Channel (<span class="gtw_id"></span>)</div>
+        <div class="card-body" id="chart_channel_gtw">
+        </div>
+      </div>
       <div class="card mb-3">
         <div class="card-header">Frequency</div>
         <div class="card-body" id="chart_frequency">
@@ -80,6 +95,7 @@
         <div class="card-header"><i class="fa fa-wifi"></i> Gateways</div>
         <div id="gateways" class="list-group list-group-flush small">
         </div>
+        <div class="card-footer small text-muted gtw_graph"><a id="gtw_hide" href="">Hide Gateway Graphs</a></div>
       </div>
       <!-- Toolbox card-->
       <div class="card mb-3">

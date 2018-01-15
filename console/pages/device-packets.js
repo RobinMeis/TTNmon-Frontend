@@ -16,7 +16,7 @@ function get_packets(dev_pseudonym, date_start, date_end) {
 
       $("#gateways").html("");
       $.each(data["gateways"], function(key, gateway) {
-        $("#gateways").append('<a class="list-group-item list-group-item-action" href="#"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"] + ' | ' + gateway["alt"] + 'm</div></div></div></a>')
+        $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gateway["gtw_id"] + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"] + ' | ' + gateway["alt"] + 'm</div></div></div></a>')
       });
 
       spreading_factor = []; //Prepare graphs
@@ -27,12 +27,12 @@ function get_packets(dev_pseudonym, date_start, date_end) {
     		spreading_factor.push([date, packet["SF"]]);
     		frequency.push([date, packet["frequency"]]);
     		packet_count.push([date, packet["packet_count"]]);
-
     	});
 
       graph_frequency(frequency); //Generate graphs
       graph_spreading_factor(spreading_factor);
       graph_packet_count(packet_count);
+      device_gateways(); //Initialize gateway functions
     }
     $( "#content" ).fadeIn(200);
   })
@@ -44,6 +44,7 @@ function get_packets(dev_pseudonym, date_start, date_end) {
 
 function update_date_button() {
   $( "#content" ).fadeOut(200);
+  $( ".gtw_graph" ).fadeOut(200);
   $("#update_date").hide();
   get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false);
 }
