@@ -9,7 +9,8 @@ function search() {
   if (input != "") {
     $.getJSON( "https://ttnmon.meis.space/api/search/?query=" + input, function( result ) {
       if (result["error"] == 0) { //Show device page
-        alert("display dev");
+        window.location.hash = "device-" + result["pseudonym"];
+        $("#search-input").val("");
       } else { //Not found. Show error
         window.location.hash = "search";
         $("#content").fadeOut(200, function() {
