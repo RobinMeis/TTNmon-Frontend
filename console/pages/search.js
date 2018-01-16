@@ -7,7 +7,7 @@ $(document).ready(function() {
 function search() {
   var input = $("#search-input").val();
   if (input != "") {
-    $.getJSON( "https://ttnmon.meis.space/api/search/?query=" + input, function( result ) {
+    $.getJSON( "https://api.ttnmon.meis.space/api/search/?query=" + input, function( result ) {
       if (result["error"] == 0) { //Show device page
         window.location.hash = "device-" + result["pseudonym"];
         $("#search-input").val("");

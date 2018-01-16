@@ -1,5 +1,5 @@
 function startpage() {
-  $.getJSON( "https://ttnmon.meis.space/api/stats/")
+  $.getJSON( "https://api.ttnmon.meis.space/api/stats/")
   .done( function( data ) {
     if (data["error"] == 0) {
       $("#registered_devices").text(data["stats"]["devices"]["count"]);

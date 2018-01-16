@@ -1,7 +1,7 @@
 var table = null;
 
 function mydevices() {
-  $.getJSON( "https://ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key'))
+  $.getJSON( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key'))
 
   .done (function( data ) { //Get table data
     if (data["error"] == 0) {
@@ -37,7 +37,7 @@ function remove_item() {
   var table_row = $(this).parents('tr');
 
   $.ajax({
-    url: "https://ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&deveui=" + table_row.attr("id"),
+    url: "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&deveui=" + table_row.attr("id"),
     type: "DELETE"
   })
 

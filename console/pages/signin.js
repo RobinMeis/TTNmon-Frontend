@@ -26,7 +26,7 @@ function signin() { //Runs on each page load
 }
 
 function signin_check(){ //Checks auth key
-  $.getJSON( "https://ttnmon.meis.space/api/device/?auth_token=" + $("#auth_key").val(), function( data ) {
+  $.getJSON( "https://api.ttnmon.meis.space/api/device/?auth_token=" + $("#auth_key").val(), function( data ) {
     if (data["error"] == 0) {
       Cookies.set('auth_key', $("#auth_key").val(), { expires: 365, path: '' });
       $("#signin-alert").removeClass("alert-danger");
