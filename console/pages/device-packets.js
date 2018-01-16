@@ -145,7 +145,8 @@ function graph_packet_count(data) {
       yAxis: {
           title: {
               text: 'Packet Count'
-          }
+          },
+          min:0
       },
       legend: {
           enabled: false
