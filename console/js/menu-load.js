@@ -12,8 +12,11 @@ window.onhashchange = function(){
 }
 
 function parse_url() {
+  if (window.location.hash == "") //Set hash if not set yet
+    window.location.hash = "#";
+
   hash = window.location.hash.split("-");
-  if (hash[0] == "" || hash[0] == "#")
+  if (hash[0] == "")
     load_page(json_pages["#startpage"], hash);
   else
     if (json_pages[hash[0]] != undefined)
