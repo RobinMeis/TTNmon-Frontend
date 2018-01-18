@@ -1,9 +1,9 @@
 {
-  "#startpage": {"javascript": "startpage", "html": "pages/startpage.html"},
-  "#imprint": {"javascript": "defaultpage", "html": "pages/imprint.html"},
-  "#getauthkey": {"javascript": "getauthkey", "html": "pages/getauthkey.html"},
-  "#signin": {"javascript": "signin", "html": "pages/signin.html"},
-  "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html"},
+  "#startpage": {"javascript": "startpage", "html": "pages/startpage.html?ver=1.0"},
+  "#imprint": {"javascript": "defaultpage", "html": "pages/imprint.html?ver=1.0"},
+  "#getauthkey": {"javascript": "getauthkey", "html": "pages/getauthkey.html?ver=1.0"},
+  "#signin": {"javascript": "signin", "html": "pages/signin.html?ver=1.0"},
+  "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html?ver=1.0"},
   "#search": {"javascript": "search_dummy", "html": "null"},
-  "#device": {"javascript": "device", "html": "pages/device.html"}
+  "#device": {"javascript": "device", "html": "pages/device.html?ver=1.1"}
 }
