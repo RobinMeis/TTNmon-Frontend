@@ -18,7 +18,15 @@ function get_packets(dev_pseudonym, date_start, date_end) {
 
       $("#gateways").html("");
       $.each(data["gateways"], function(key, gateway) {
-        $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gateway["gtw_id"] + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"] + ' | ' + gateway["alt"] + 'm</div></div></div></a>')
+        var coordinates_string = "";
+        if (gateway["lat"] != null || gateway["lon"] != null) { //Hide coordinates if null
+          coordinates_string = '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"];
+          if (gateway["alt"] != null)
+            coordinates_string += ' | ' + gateway["alt"] + 'm';
+          coordinates_string += '</div>'
+        }
+
+        $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gateway["gtw_id"] + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + coordinates_string + '</div></div></a>');
       });
 
       spreading_factor = []; //Prepare graphs
