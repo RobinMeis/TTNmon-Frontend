@@ -1,7 +1,7 @@
 var json_pages = null;
 
 $(document).ready(function() {
-  $.getJSON( "pages/pages.json", function( data ) {
+  $.getJSON( "pages/pages.json?ver=1.1", function( data ) {
     json_pages = data;
     parse_url();
   });
