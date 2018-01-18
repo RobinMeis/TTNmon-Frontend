@@ -215,7 +215,7 @@ function graph_gateway_count(data) {
       },
 
       series: [{
-          type: 'area',
+          type: 'line',
           data: data
       }]
   });
