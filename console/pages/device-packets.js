@@ -21,17 +21,20 @@ function get_packets(dev_pseudonym, date_start, date_end) {
 
       spreading_factor = []; //Prepare graphs
     	frequency = [];
-    	packet_count = [];
+      packet_count = [];
+    	gateway_count = [];
     	$.each(data["packets"], function (index, packet) {
     		date = Date.parse(packet["time"])
     		spreading_factor.push([date, packet["SF"]]);
     		frequency.push([date, packet["frequency"]]);
-    		packet_count.push([date, packet["packet_count"]]);
+        packet_count.push([date, packet["packet_count"]]);
+    		gateway_count.push([date, packet["gateway_count"]]);
     	});
 
       graph_frequency(frequency); //Generate graphs
       graph_spreading_factor(spreading_factor);
       graph_packet_count(packet_count);
+      graph_gateway_count(gateway_count);
       device_gateways(); //Initialize gateway functions
     }
     $( "#content" ).fadeIn(200);
@@ -145,6 +148,49 @@ function graph_packet_count(data) {
       yAxis: {
           title: {
               text: 'Packet Count'
+          },
+          min:0
+      },
+      legend: {
+          enabled: false
+      },
+      plotOptions: {
+          area: {
+              marker: {
+                  radius: 2
+              },
+              lineWidth: 1,
+              states: {
+                  hover: {
+                      lineWidth: 1
+                  }
+              },
+              threshold: null
+          }
+      },
+
+      series: [{
+          type: 'area',
+          data: data
+      }]
+  });
+}
+
+
+function graph_gateway_count(data) {
+  Highcharts.chart('chart_gateway_count', {
+      chart: {
+          zoomType: 'x'
+      },
+      title: {
+          text: null
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+          title: {
+              text: 'Gateway Count'
           },
           min:0
       },
