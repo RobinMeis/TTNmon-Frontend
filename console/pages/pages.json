@@ -5,5 +5,5 @@
   "#signin": {"javascript": "signin", "html": "pages/signin.html?ver=1.0"},
   "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html?ver=1.0"},
   "#search": {"javascript": "search_dummy", "html": "null"},
-  "#device": {"javascript": "device", "html": "pages/device.html?ver=1.1"}
+  "#device": {"javascript": "device", "html": "pages/device.html?ver=1.12}
 }

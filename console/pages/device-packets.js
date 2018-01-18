@@ -13,6 +13,8 @@ function get_packets(dev_pseudonym, date_start, date_end) {
       $("#SF_min").text(data["packet_stats"]["SF_min"]); //packet stats
       $("#SF_max").text(data["packet_stats"]["SF_max"]);
       $("#packets").text(data["packet_stats"]["packets"]);
+      $("#gateway_count_min").text(data["packet_stats"]["gateway_count_min"]);
+      $("#gateway_count_max").text(data["packet_stats"]["gateway_count_max"]);
 
       $("#gateways").html("");
       $.each(data["gateways"], function(key, gateway) {
