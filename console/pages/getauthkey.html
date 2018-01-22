@@ -24,7 +24,10 @@
         <input id="method" class="form-control" type="text" value="POST" readonly>
 
         <label for="auth_key">Authorization</label>
-        <input id="auth_key" class="form-control" type="text" value="Generating Authorization failed. Please reload page" readonly>
+        <div id="pwd_reveal" class="input-group">
+          <span class="input-group-btn"><button class="btn btn-default reveal" type="button"><i class="fa fa-eye"></i></button></span>
+          <input id="auth_key" class="form-control pwd" type="password" value="Generating Authorization failed. Please reload page" readonly>
+        </div>
         Custom headers are not required
       </div>
       <div class="alert alert-warning">

@@ -9,5 +9,18 @@ function getauthkey() {
     });
   } else //Use existing key
     $("#auth_key").val(Cookies.get('auth_key'));
+  $(".reveal").on('click', reveal_pwd);
   $( "#content" ).fadeIn(200);
+}
+
+function reveal_pwd() {
+  if ($("#pwd_reveal input").attr('type') == 'password') {
+    $("#pwd_reveal input").attr('type', 'text');
+    $("#pwd_reveal span button i").removeClass("fa-eye");
+    $("#pwd_reveal span button i").addClass("fa-eye-slash");
+  } else {
+    $("#pwd_reveal input").attr('type', 'password');
+    $("#pwd_reveal span button i").removeClass("fa-eye-slash");
+    $("#pwd_reveal span button i").addClass("fa-eye");
+  }
 }
