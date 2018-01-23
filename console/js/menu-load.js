@@ -1,7 +1,7 @@
 var json_pages = null;
 
 $(document).ready(function() {
-  $.getJSON( "pages/pages.json?ver=1.3", function( data ) {
+  $.getJSON( "pages/pages.json?t=" + Date.now(), function( data ) {
     json_pages = data;
     parse_url();
   });
@@ -27,7 +27,7 @@ function parse_url() {
 
 function load_page(file, hash) {
   if (file["html"] != "null") {
-      $.get( file["html"], function(data) {
+      $.get( file["html"] + "?t=" + Date.now(), function(data) {
         $( "#content" ).fadeOut(200, function() {
           $( "#content" ).html(data);
           window[file["javascript"]](hash);
