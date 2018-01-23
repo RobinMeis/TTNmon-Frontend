@@ -25,7 +25,7 @@ class mapLinks {
     });
 
     this._map = L.map(this._mapContainer).setView([40, 0], 3);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
   }
 
   get map() {
