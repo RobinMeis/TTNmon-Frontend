@@ -5,11 +5,12 @@ function startpage() {
       $("#registered_devices").text(data["stats"]["devices"]["count"]);
       $("#authorization_tokens").text(data["stats"]["authorizations"]["count"]);
       $("#received_packets").text(data["stats"]["packets"]["count"]);
-      $("#gateways").text(data["stats"]["gateways"]["count"]);
+      $("#gateways").text(data["stats"]["unique_gateways"]["count"]);
     } else {
       $("#registered_devices").hide();
       $("#authorization_tokens").hide();
       $("#received_packets").hide();
+      $("#gateways").hide();
     }
     $( "#content" ).fadeIn(200);
   })
