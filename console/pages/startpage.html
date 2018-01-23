@@ -49,67 +49,22 @@
       </div>
     </div>
   </div>
-  <!-- Introduction-->
-  <div class="card mb-3">
-    <div class="card-header">
-      <i class="fa fa-life-ring"></i> Welcome to TTNmon</div>
-    <div class="card-body">
-      <p>TTNmon is an open source project to collect more information about the performance and link quality of LoRaWAN.</p>
-      <h4>What does TTNmon do?</h4>
-      <p>The backend receives the data using the HTTP Integration of <a target="_blank" href="https://thethingsnetwork.org">The Things Network</a>. These information are stored in a database and are displayed on this website. You can find example devices in the card "Interesting Devices" below. In future there will be public available database dumps to allow everybody to use the data for their own purposes.</p>
-      <h4>Why should I care?</h4>
-      <p>To get reliable information of various environmental influences we need a huge amount of data. So it is useful to collect it at a central place. The results of this project can finally affect your next projects. Another great ability of this service is to monitor your device. You are able to check historical connection data of your own devices and explain possible issues.</p>
-      <h4>How can I help?</h4>
-      <p>If you own a LoRaWAN device connected to The Things Network please consider to share it with me. To forward your packet data to this service you will need to follow these steps:</p>
-      <ol>
-        <li>Click on My Authorization. Click on Get Authorization Key if you don't have a key yet.<br>This key is used to identify your application and to sign into the website. Furthermore your device will be linked to this key after I got the first message. This prevents others from sending fake data for your device but also means you can't unregister your device from TTNmon if you loose your key. So you should store it at a save place.</li>
-        <li>Goto <a href="https://console.thethingsnetwork.org/applications" target="_blank">https://console.thethingsnetwork.org/applications</a>. Select your application and click on Integrations</li>
-        <li>Click on add integration and choose HTTP Integration</li>
-        <li>Enter the following data:
-          <ul>
-            <li><strong>Proccess ID</strong><br>Enter anything you want</li>
-            <li><strong>URL</strong><br>The URL displayed</li>
-            <li><strong>Access Key</strong><br>You can generate a new key. But it is required to allow access to devices. This is used to verify the device actually belongs to you on first connect. After that you might remove the device permission</li>
-            <li><strong>Method</strong><br>POST</li>
-            <li><strong>Authorization</strong><br>The Authorization displayed. This is also used to sign into TTNmon</li>
-            <li>Custom headers are not required</li>
-          </ul>
-        </li>
-        <li>Now you need to wait for the next packet of your device. You devices will appear a <a href="http://localhost:8000/console/#mydevices">here</a>. There you can view or remove a device.</li>
-      </ol>
-      <h4>Which information are stored?</h4>
-        <h5>Devices</h5>
-        <p>To identify your devices the following information are stored: deveui, app_id and dev_id. These information are never published and only displaced in your private device list</p>
-        <h5>Packets</h5>
-        <p>With any valid packet the following information are stored: time, packet counter, frequency, spreading factor, bandwidth and coding rate. If you specified your devices coordinates in TTN they are stored as well</p>
-        <h5>Gateways</h5>
-        <p>For each packets also the gateways the packet received are stored. The following information are stored: time, gateway id, channel, rssi, snr, rf chain and the gateways coordinates</p>
-      <h4>Is my payload stored?</h4>
-      <p>No.</p>
-      <h4>Is my DevEUI stored or public?</h4>
-      <p>Your DevEUI is only stored for device authentication together with your authorization token. Every device has a pseudonym which is used to store its packets. Only you can see your DevEUIs. It won't be publishes in a database dump.</p>
-      <h4>Which information are public?</h4>
-      <p>Except your DevEUI and authorization key all information are public. As the device pseudonyms are incremented and start with 1, everybody is able to get the information for any device. This is already implied by the goal of offering database dumps.</p>
-      <h4>Is this project open source? / How can I contribute? / How can I trust you? / <span class="fa fa-github"></span>?</h4>
-      <p>This project is open source. You find it on GitHub:
-        <ul>
-          <li><a target="_blank" href="https://github.com/RobinMeis/TTNmon-Frontend">TTNmon-Frontend</a></li>
-          <li><a target="_blank" href="https://github.com/RobinMeis/TTNmon-Backend">TTNmon-Backend</a></li>
-        </ul>
-      </p>
-    </div>
-  </div>
   <div class="row">
     <div class="col-lg-8">
-      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">Map is finally there!</div>
+        <div class="card-body">
+          Finally TTNmon has a <a href="#map">map</a> to show the tracked nodes and seen gateways. If you don't have privacy concerns, please add your nodes coordinates in the TTN console. This way the data becomes more interesting for all of us.
+        </div>
+        <div class="card-footer small text-muted">23.01.2018 - 00:42</div>
+      </div>
       <div class="card mb-3">
         <div class="card-header">Welcome to TTNmon</div>
         <div class="card-body">
-          TTNmon is currently &beta;. Take a look around but don't expect too much.
+          TTNmon is currently &beta;. Take a look around but don't expect too much. Please visit the <a href="#faq">FAQ</a> for setup instructions
         </div>
         <div class="card-footer small text-muted">14.01.2018 - 02:11</div>
       </div>
-      <!-- /Card Columns-->
     </div>
     <div class="col-lg-4">
       <!-- Interesting devices Card-->

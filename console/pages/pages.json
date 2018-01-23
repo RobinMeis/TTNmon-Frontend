@@ -6,5 +6,6 @@
   "#mydevices": {"javascript": "mydevices", "html": "pages/mydevices.html"},
   "#search": {"javascript": "search_dummy", "html": "null"},
   "#device": {"javascript": "device", "html": "pages/device.html"},
-  "#map": {"javascript": "map_page", "html": "pages/map.html"}
+  "#map": {"javascript": "map_page", "html": "pages/map.html"},
+  "#faq": {"javascript": "faq", "html": "pages/faq.html"}
 }
