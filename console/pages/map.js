@@ -18,15 +18,14 @@ class map_page_class {
   constructor(mapping, node=null) {
     this.mapping = mapping;
     this.node = node;
+    this.gateways_finished = false;
+    this.nodes_finished = false;
 
     if (node == null) $(".breadcrumb").append('<li class="breadcrumb-item">Map</li>'); //Generate breadcrumb
     else $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">' + node + '</li>');
 
     this.getGateways(this);
     this.getNodes(this);
-
-    this.gateways_finished = false;
-    this.nodes_finished = false;
   }
 
   getGateways(self) {
