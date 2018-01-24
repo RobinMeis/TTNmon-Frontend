@@ -4,9 +4,23 @@ function map_page(node) { //Runs on each page load
   mapping = new mapLinks("map");
   var map_data = new map_page_class(mapping, node);
 
-  $('#map_selector input[type=radio]').change(function() {
-       if (this.id == "openstreetmap") mapping.useOSM();
-       else if (this.id == "opentopomap") mapping.useOTM();
+  $('#map_selector input[type=radio]').change(function() { //Select maps
+     if (this.id == "openstreetmap") mapping.useOSM();
+      else if (this.id == "opentopomap") mapping.useOTM();
+   });
+
+   $('#layer_selector input[type=checkbox]').change(function() { //Select maps
+     var layer = $(this).attr("data-layer");
+     if (layer == "nodes") {
+       if ($(this).prop('checked')) mapping.showNodes(true);
+       else mapping.showNodes(false);
+     } else if (layer == "gateways") {
+       if ($(this).prop('checked')) mapping.showGateways(true);
+       else mapping.showGateways(false);
+     } else if (layer == "links") {
+       if ($(this).prop('checked')) mapping.showLinks(true);
+       else mapping.showLinks(false);
+     }
    });
 
   $("#content").fadeIn(200, function() {
@@ -40,6 +54,7 @@ class map_page_class {
         }
       });
       self.gateways_finished = true;
+      self.mapping.showGateways(true);
       self.getLinks(self);
     });
   }
@@ -66,6 +81,7 @@ class map_page_class {
         $("#map_error").html("Due to missing device coordinates or wrong device id your device was not found. Please add coordinates in the TTN console to show your node on the map.");
         $("#map_error").fadeIn();
       }
+      self.mapping.showNodes(true);
       self.nodes_finished = true;
       self.getLinks(self);
     });
@@ -78,6 +94,7 @@ class map_page_class {
           mapping.addLink(link["gtw_id"], link["dev_pseudonym"], link["snr"]);
         });
       });
+      self.mapping.showLinks(true);
     }
   }
 }

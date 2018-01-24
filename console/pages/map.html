@@ -8,15 +8,15 @@
   <div class="card mb-3">
     <div class="card-body">
       <p>If your device is missing you have probably not set any coordinates in the TTN console. All gateway data is based on the data forwarded by the nodes HTTP integrations.</p>
-      <div class="btn-group btn-group-sm" data-toggle="buttons">
+      <div id="layer_selector" class="btn-group btn-group-sm" data-toggle="buttons">
         <label class="btn btn-primary active">
-          <input type="checkbox" checked autocomplete="off"> Gateways
+          <input type="checkbox" data-layer="gateways" checked autocomplete="off"> Gateways
         </label>
         <label class="btn btn-primary active">
-          <input type="checkbox" checked autocomplete="off"> Nodes
+          <input type="checkbox" data-layer="nodes" checked autocomplete="off"> Nodes
         </label>
         <label class="btn btn-primary active">
-          <input type="checkbox" checked autocomplete="off"> Link
+          <input type="checkbox" data-layer="links" checked autocomplete="off"> Links
         </label>
       </div>
 
