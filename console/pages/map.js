@@ -1,6 +1,8 @@
-function map_page() { //Runs on each page load
+function map_page(node) { //Runs on each page load
+  if (node[1] == undefined) node = null
+  else node = node[1]
   mapping = new mapLinks("map");
-  var map_data = new map_page_class(mapping);
+  var map_data = new map_page_class(mapping, node);
 
   $("#content").fadeIn(200, function() {
     mapping.map.invalidateSize();
@@ -8,8 +10,9 @@ function map_page() { //Runs on each page load
 }
 
 class map_page_class {
-  constructor(mapping) {
+  constructor(mapping, node) {
     this.mapping = mapping;
+    this.node = node;
     this.getGateways(this);
     this.getNodes(this);
 
@@ -37,13 +40,17 @@ class map_page_class {
     $.getJSON( "https://api.ttnmon.meis.space/api/device/locations/", function( data ) { //Add nodes to map
       var popup_string;
       $.each( data["devices"], function( key, node ) {
-        if (node["latitude"] != null && node["longitude"] != null) {
+        if (node["latitude"] != null && node["longitude"] != null && (self.node == null || self.node == node["pseudonym"])) {
           popup_string = "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br><a href=\"#device-" + node["pseudonym"] + "\"><strong>Details</strong></a><br><small>" + node["latitude"] + " | " + node["longitude"];
           if (node["altitude"] == null) popup_string += "</small>"
           else popup_string += " | " + node["altitude"] + "m</small>"
           self.mapping.addNode(node["pseudonym"], node["latitude"], node["longitude"], popup_string);
+
+          if (self.node != null)
+            self.mapping.map.setView([node["latitude"], node["longitude"]], 12); //Set view to node
         }
       });
+
       self.nodes_finished = true;
       self.getLinks(self);
     });
