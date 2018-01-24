@@ -5,9 +5,10 @@ function map_page(node) { //Runs on each page load
   var map_data = new map_page_class(mapping, node);
 
   $('#map_selector input[type=radio]').change(function() { //Select maps
-     if (this.id == "openstreetmap") mapping.useOSM();
-      else if (this.id == "opentopomap") mapping.useOTM();
-   });
+    if (this.id == "openstreetmap") mapping.useOSM();
+    else if (this.id == "opentopomap") mapping.useOTM();
+    else if (this.id == "toner-lite") mapping.useTonerLite();
+  });
 
    $('#layer_selector input[type=checkbox]').change(function() { //Select maps
      var layer = $(this).attr("data-layer");

@@ -27,6 +27,7 @@ class mapLinks {
     this._map = L.map(this._mapContainer).setView([40, 0], 3);
     this._osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
     this._otmLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a> contributors'});
+    this._tonerLiteLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> | Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
 
     this._nodeLayer = L.layerGroup();
     this._gatewayLayer = L.layerGroup();
@@ -37,10 +38,18 @@ class mapLinks {
     return this._map;
   }
 
+  useTonerLite() {
+    this._map.setMaxZoom(18);
+    this._tonerLiteLayer.addTo(this._map);
+    this._otmLayer.removeFrom(this._map);
+    this._osmLayer.removeFrom(this._map);
+  }
+
   useOSM() {
     this._map.setMaxZoom(18);
     this._osmLayer.addTo(this._map);
     this._otmLayer.removeFrom(this._map);
+    this._tonerLiteLayer.removeFrom(this._map);
   }
 
   useOTM() {
@@ -48,6 +57,7 @@ class mapLinks {
     this._map.setMaxZoom(17);
     this._otmLayer.addTo(this._map);
     this._osmLayer.removeFrom(this._map);
+    this._tonerLiteLayer.removeFrom(this._map);
   }
 
   showGateways(show) {
