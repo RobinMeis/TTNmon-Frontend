@@ -14,7 +14,7 @@ class map_page_class {
     this.mapping = mapping;
     this.node = node;
 
-    if (node == null) $(".breadcrumb").append('<li class="breadcrumb-item">Map</li>');
+    if (node == null) $(".breadcrumb").append('<li class="breadcrumb-item">Map</li>'); //Generate breadcrumb
     else $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">' + node + '</li>');
 
     this.getGateways(this);
@@ -52,7 +52,7 @@ class map_page_class {
           self.mapping.addNode(node["pseudonym"], node["latitude"], node["longitude"], popup_string);
 
           if (self.node != null) {
-            self.mapping.map.setView([node["latitude"], node["longitude"]], 12); //Set view to node
+            self.mapping.map.setView([node["latitude"], node["longitude"]], 18); //Set view to node
             found_node = true;
           }
         }
