@@ -4,6 +4,7 @@ function device(hash) {
     $("#content").fadeIn(200);
   } else {
     $("#pseudonym_id").text(hash[1]);
+    $("#maplink").attr("href", "#map-" + hash[1]);
 
     var options={ //Configure datepickers
       format: 'dd.mm.yyyy',
