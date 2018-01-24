@@ -5,6 +5,31 @@
   </ol>
 
   <div id="map_error" style="display:none;" class="alert alert-danger"></div>
+  <div class="card mb-3">
+    <div class="card-body">
+      <p>If your device is missing you have probably not set any coordinates in the TTN console. All gateway data is based on the data forwarded by the nodes HTTP integrations.</p>
+      <div class="btn-group btn-group-sm" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="checkbox" checked autocomplete="off"> Gateways
+        </label>
+        <label class="btn btn-primary active">
+          <input type="checkbox" checked autocomplete="off"> Nodes
+        </label>
+        <label class="btn btn-primary active">
+          <input type="checkbox" checked autocomplete="off"> Link
+        </label>
+      </div>
+
+      <div id="map_selector" class="btn-group btn-group-sm" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="radio" name="options" id="openstreetmap" autocomplete="off" checked> OpenStreetMap
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="opentopomap" autocomplete="off"> OpenTopoMap
+        </label>
+      </div>
+    </div>
+  </div>
 
   <div class="card mb-3">
     <div id="map" style="height:600px;" class="card-body">

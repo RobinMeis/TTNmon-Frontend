@@ -4,6 +4,11 @@ function map_page(node) { //Runs on each page load
   mapping = new mapLinks("map");
   var map_data = new map_page_class(mapping, node);
 
+  $('#map_selector input[type=radio]').change(function() {
+       if (this.id == "openstreetmap") mapping.useOSM();
+       else if (this.id == "opentopomap") mapping.useOTM();
+   });
+
   $("#content").fadeIn(200, function() {
     mapping.map.invalidateSize();
   });

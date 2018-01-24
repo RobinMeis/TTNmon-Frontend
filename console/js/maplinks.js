@@ -25,11 +25,26 @@ class mapLinks {
     });
 
     this._map = L.map(this._mapContainer).setView([40, 0], 3);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
+    this._osmlayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
+    this._otmlayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a> contributors'});
+
   }
 
   get map() {
     return this._map;
+  }
+
+  useOSM() {
+    this._map.setMaxZoom(18);
+    this._osmlayer.addTo(this._map);
+    this._otmlayer.removeFrom(this._map);
+  }
+
+  useOTM() {
+    if (this._map.getZoom() > 17) this._map.setZoom(17); //Zoom out if zoom is to high for OTM
+    this._map.setMaxZoom(17);
+    this._otmlayer.addTo(this._map);
+    this._osmlayer.removeFrom(this._map);
   }
 
   addGateway(gtw_id, latitude, longitude, popup=null) { //Add gateway to map
