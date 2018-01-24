@@ -25,9 +25,12 @@ class mapLinks {
     });
 
     this._map = L.map(this._mapContainer).setView([40, 0], 3);
-    this._osmlayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
-    this._otmlayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a> contributors'});
+    this._osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
+    this._otmLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a> contributors'});
 
+    this._nodeLayer = L.layerGroup();
+    this._gatewayLayer = L.layerGroup();
+    this._linkLayer = L.layerGroup();
   }
 
   get map() {
@@ -36,15 +39,30 @@ class mapLinks {
 
   useOSM() {
     this._map.setMaxZoom(18);
-    this._osmlayer.addTo(this._map);
-    this._otmlayer.removeFrom(this._map);
+    this._osmLayer.addTo(this._map);
+    this._otmLayer.removeFrom(this._map);
   }
 
   useOTM() {
     if (this._map.getZoom() > 17) this._map.setZoom(17); //Zoom out if zoom is to high for OTM
     this._map.setMaxZoom(17);
-    this._otmlayer.addTo(this._map);
-    this._osmlayer.removeFrom(this._map);
+    this._otmLayer.addTo(this._map);
+    this._osmLayer.removeFrom(this._map);
+  }
+
+  showGateways(show) {
+    if (show) this._gatewayLayer.addTo(this._map);
+    else this._gatewayLayer.removeFrom(this._map);
+  }
+
+  showNodes(show) {
+    if (show) this._nodeLayer.addTo(this._map);
+    else this._nodeLayer.removeFrom(this._map);
+  }
+
+  showLinks(show) {
+    if (show) this._linkLayer.addTo(this._map);
+    else this._linkLayer.removeFrom(this._map);
   }
 
   addGateway(gtw_id, latitude, longitude, popup=null) { //Add gateway to map
@@ -52,7 +70,7 @@ class mapLinks {
       if (popup == null) popup = gtw_id;
       this._gateways[gtw_id] = L.marker([latitude, longitude], {icon: this.gatewayIcon})
         .bindPopup(popup)
-        .addTo(this._map);
+        .addTo(this._gatewayLayer);
       return true;
     } else
       return false;
@@ -63,7 +81,7 @@ class mapLinks {
       if (popup == null) popup = node_pseudonym;
       this._nodes[node_pseudonym] = L.marker([latitude, longitude], {icon: this.nodeIcon})
         .bindPopup(popup)
-        .addTo(this._map);
+        .addTo(this._nodeLayer);
       return true;
     } else
       return false;
@@ -88,7 +106,7 @@ class mapLinks {
       latlngs.push (this._gateways[gtw_id].getLatLng());
       latlngs.push (this._nodes[node_pseudonym].getLatLng());
 
-      L.polyline(latlngs, {color: getColor(snr / 100)}).addTo(this._map);
+      L.polyline(latlngs, {color: getColor(snr / 100)}).addTo(this._linkLayer);
     }
   }
 }
