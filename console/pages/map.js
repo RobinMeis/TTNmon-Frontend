@@ -10,9 +10,13 @@ function map_page(node) { //Runs on each page load
 }
 
 class map_page_class {
-  constructor(mapping, node) {
+  constructor(mapping, node=null) {
     this.mapping = mapping;
     this.node = node;
+
+    if (node == null) $(".breadcrumb").append('<li class="breadcrumb-item">Map</li>');
+    else $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">' + node + '</li>');
+
     this.getGateways(this);
     this.getNodes(this);
 
@@ -39,6 +43,7 @@ class map_page_class {
   getNodes(self) {
     $.getJSON( "https://api.ttnmon.meis.space/api/device/locations/", function( data ) { //Add nodes to map
       var popup_string;
+      var found_node = false;
       $.each( data["devices"], function( key, node ) {
         if (node["latitude"] != null && node["longitude"] != null && (self.node == null || self.node == node["pseudonym"])) {
           popup_string = "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br><a href=\"#device-" + node["pseudonym"] + "\"><strong>Details</strong></a><br><small>" + node["latitude"] + " | " + node["longitude"];
@@ -46,11 +51,17 @@ class map_page_class {
           else popup_string += " | " + node["altitude"] + "m</small>"
           self.mapping.addNode(node["pseudonym"], node["latitude"], node["longitude"], popup_string);
 
-          if (self.node != null)
+          if (self.node != null) {
             self.mapping.map.setView([node["latitude"], node["longitude"]], 12); //Set view to node
+            found_node = true;
+          }
         }
       });
 
+      if (self.node != null && found_node == false) {
+        $("#map_error").html("Due to missing device coordinates or wrong device id your device was not found. Please add coordinates in the TTN console to show your node on the map.");
+        $("#map_error").fadeIn();
+      }
       self.nodes_finished = true;
       self.getLinks(self);
     });
