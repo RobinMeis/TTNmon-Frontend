@@ -19,9 +19,14 @@ class map_page_class {
 
   getGateways(self) {
     $.getJSON( "https://api.ttnmon.meis.space/api/gateway/list/", function( data ) { //Add gateways to map
+      var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
-        if (gateway["latitude"] != null && gateway["longitude"] != null)
-          self.mapping.addGateway(gateway["gtw_id"], gateway["latitude"], gateway["longitude"], "<strong>" + gateway["gtw_id"] + "</strong><br>First seen: " + gateway["first_seen"] + "<br>Last seen: " + gateway["last_seen"] + "<br>Channels: " + gateway["channels"] + "<br>Packets: " + gateway["packets"]);
+        if (gateway["latitude"] != null && gateway["longitude"] != null) {
+          popup_string = "<strong>" + gateway["gtw_id"] + "</strong><br>First seen: " + gateway["first_seen"] + "<br>Last seen: " + gateway["last_seen"] + "<br>Channels: " + gateway["channels"] + "<br>Packets: " + gateway["packets"] + "<br><small>" + gateway["latitude"] + " | " + gateway["longitude"];
+          if (gateway["altitude"] == null) popup_string += "</small>"
+          else popup_string += " | " + gateway["altitude"] + "m</small>"
+          self.mapping.addGateway(gateway["gtw_id"], gateway["latitude"], gateway["longitude"], popup_string);
+        }
       });
       self.gateways_finished = true;
       self.getLinks(self);
