@@ -35,9 +35,14 @@ class map_page_class {
 
   getNodes(self) {
     $.getJSON( "https://api.ttnmon.meis.space/api/device/locations/", function( data ) { //Add nodes to map
+      var popup_string;
       $.each( data["devices"], function( key, node ) {
-        if (node["latitude"] != null && node["longitude"] != null)
-          self.mapping.addNode(node["pseudonym"], node["latitude"], node["longitude"], "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br><strong><a href=\"#device-" + node["pseudonym"] + "\">Details</strong>");
+        if (node["latitude"] != null && node["longitude"] != null) {
+          popup_string = "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br><a href=\"#device-" + node["pseudonym"] + "\"><strong>Details</strong></a><br><small>" + node["latitude"] + " | " + node["longitude"];
+          if (node["altitude"] == null) popup_string += "</small>"
+          else popup_string += " | " + node["altitude"] + "m</small>"
+          self.mapping.addNode(node["pseudonym"], node["latitude"], node["longitude"], popup_string);
+        }
       });
       self.nodes_finished = true;
       self.getLinks(self);
