@@ -70,7 +70,10 @@ class map_page_class {
       var found_node = false;
       $.each( data["devices"], function( key, node ) {
         if (node["latitude"] != null && node["longitude"] != null && (self.node == null || self.node == node["pseudonym"])) {
-          popup_string = "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br><a href=\"#map-" + node["pseudonym"] + "\"><strong>Show only this node</strong></a> | <a href=\"#device-" + node["pseudonym"] + "\"><strong>Details</strong></a><br><small>" + node["latitude"] + " | " + node["longitude"];
+          popup_string = "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br>";
+          if (self.node == null) //Hide "show only this node" if only a sigle node is shown
+            popup_string += "<a href=\"#map-" + node["pseudonym"] + "\"><strong>Show only this node</strong></a> | ";
+          popup_string += "<a href=\"#device-" + node["pseudonym"] + "\"><strong>Details</strong></a><br><small>" + node["latitude"] + " | " + node["longitude"];
           if (node["altitude"] == null) popup_string += "</small>"
           else popup_string += " | " + node["altitude"] + "m</small>"
           self.mapping.addNode(node["pseudonym"], node["latitude"], node["longitude"], popup_string);
