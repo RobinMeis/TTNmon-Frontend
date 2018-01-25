@@ -37,7 +37,11 @@ class map_page_class {
     this.nodes_finished = false;
 
     if (node == null) $(".breadcrumb").append('<li class="breadcrumb-item">Map</li>'); //Generate breadcrumb
-    else $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">Showing only node ' + node + '</li>');
+    else {
+      $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">Showing only node ' + node + '</li>');
+      $("#show_node a").attr('href', '#device-' + node);
+      $("#show_node").show();
+    }
 
     this.getGateways(this);
     this.getNodes(this);
