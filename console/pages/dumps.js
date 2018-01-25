@@ -3,7 +3,7 @@ function dumps() {
 
   .done (function( data ) { //Get table data
       $.each(data["dumps"], function( key, dump ) {
-        $("#dumpTable tbody").append("<tr><td>" + dump["filename"] + "</td><td>" + dump["filesize"] / 1000000 + " MB</td><td>" + dump["sha256"] + "</td><td style=\"text-align:center;\"><a href=\"" + dump["download_url"] + "\"><i class=\"fa fa-download\"></i></a></td></tr>");
+        $("#dumpTable tbody").append("<tr><td>" + dump["filename"] + "</td><td>" + Math.round(dump["filesize"] / 100000) / 10 + " MB</td><td>" + dump["sha256"] + "</td><td style=\"text-align:center;\"><a href=\"" + dump["download_url"] + "\"><i class=\"fa fa-download\"></i></a></td></tr>");
       });
 
       table = $("#dumpTable").DataTable({ //jQuery DataTables
