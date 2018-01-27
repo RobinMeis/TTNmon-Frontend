@@ -11,7 +11,9 @@ function dumps() {
           { targets: [3], orderable: false},
         ],
         "initComplete": function(settings, json) { //Show table after complete
-          $( "#content" ).fadeIn(200);
+          $( "#content" ).fadeIn(200, function() {
+            table.columns.adjust();
+          });
         }
       });
   })
