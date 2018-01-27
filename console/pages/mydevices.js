@@ -6,7 +6,7 @@ function mydevices() {
   .done (function( data ) { //Get table data
     if (data["error"] == 0) {
       $.each(data["devices"], function( key, device ) {
-        $("#devTable tbody").append("<tr id=\"" + device["deveui"] + "\"><td>" + device["deveui"] + "</td><td>" + device["app_id"] + "</td><td>" + device["dev_id"] + "</td><td>" + device["pseudonym"] + "</td><td>" + device["created"] + "</td><td><a href=\"#mydevices\" class=\"delButton\"><i class=\"fa fa-trash\"></i></a> <a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a></td></tr>");
+        $("#devTable tbody").append("<tr id=\"" + device["deveui"] + "\"><td>" + device["deveui"] + "</td><td>" + device["app_id"] + "</td><td>" + device["dev_id"] + "</td><td>" + device["pseudonym"] + "</td><td>" + device["created"] + "</td><td>" + device["last_seen"] + "</td><td><a href=\"#mydevices\" class=\"delButton\"><i class=\"fa fa-trash\"></i></a> <a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a></td></tr>");
       });
 
       table = $("#devTable").DataTable({ //jQuery DataTables
@@ -14,7 +14,9 @@ function mydevices() {
           { targets: [5], orderable: false},
         ],
         "initComplete": function(settings, json) { //Show table after complete
-          $( "#content" ).fadeIn(200);
+          $( "#content" ).fadeIn(200, function() {
+            table.columns.adjust();
+          });
         }
       });
       $('#devTable tbody').on( 'click', 'a.delButton', remove_item); //Delete device button
