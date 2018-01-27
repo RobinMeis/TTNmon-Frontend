@@ -6,7 +6,7 @@ function mydevices() {
   .done (function( data ) { //Get table data
     if (data["error"] == 0) {
       $.each(data["devices"], function( key, device ) {
-        $("#devTable tbody").append("<tr id=\"" + device["deveui"] + "\"><td>" + device["deveui"] + "</td><td>" + device["app_id"] + "</td><td>" + device["dev_id"] + "</td><td>" + device["pseudonym"] + "</td><td>" + device["created"] + "</td><td>" + device["last_seen"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a> <a href=\"#mydevices\" class=\"delButton\"><i class=\"fa fa-trash\"></i></a></td></tr>");
+        $("#devTable tbody").append("<tr id=\"" + device["deveui"] + "\"><td>" + device["deveui"] + "</td><td>" + device["app_id"] + "</td><td>" + device["dev_id"] + "</td><td>" + device["pseudonym"] + "</td><td>" + device["created"] + "</td><td>" + device["last_seen"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a>&nbsp;&nbsp;&nbsp;<a href=\"#mydevices\" class=\"delButton\"><i class=\"fa fa-trash\"></i></a></td></tr>");
       });
 
       table = $("#devTable").DataTable({ //jQuery DataTables
