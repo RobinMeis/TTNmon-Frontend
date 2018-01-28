@@ -10,6 +10,7 @@ function dumps() {
         columnDefs: [
           { targets: [3], orderable: false},
         ],
+        order: [[0, 'desc']],
         "initComplete": function(settings, json) { //Show table after complete
           $( "#content" ).fadeIn(200, function() {
             table.columns.adjust();
