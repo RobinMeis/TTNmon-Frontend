@@ -9,6 +9,7 @@ $(document).ready(function() {
 });
 
 function signin() { //Runs on each page load
+  $("#spinner").hide();
   $("#content").fadeIn(200);
 
   if (Cookies.get('auth_key') == undefined) { //Not signed in
@@ -26,7 +27,8 @@ function signin() { //Runs on each page load
 }
 
 function signin_check(){ //Checks auth key
-  $.getJSON( "https://api.ttnmon.meis.space/api/device/?auth_token=" + $("#auth_key").val(), function( data ) {
+  $.getJSON( "https://api.ttnmon.meis.space/api/device/?auth_token=" + $("#auth_key").val())
+  .done(function( data ) {
     if (data["error"] == 0) {
       Cookies.set('auth_key', $("#auth_key").val(), { expires: 365, path: '' });
       $("#signin-alert").removeClass("alert-danger");
@@ -43,6 +45,13 @@ function signin_check(){ //Checks auth key
       $("#signin-alert").html("Your authorization token is invalid");
       $("#signin-alert").fadeIn();
     }
+  })
+
+  .fail(function() {
+    $("#signin-alert").removeClass("alert-success");
+    $("#signin-alert").addClass("alert-danger");
+    $("#signin-alert").html("Checking your Authorization Key failed. Please try again later");
+    $("#signin-alert").fadeIn();
   });
 }
 
