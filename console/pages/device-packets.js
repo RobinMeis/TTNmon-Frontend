@@ -47,9 +47,11 @@ function get_packets(dev_pseudonym, date_start, date_end) {
       graph_gateway_count(gateway_count);
       device_gateways(); //Initialize gateway functions
     }
-    $( "#content" ).fadeIn(200);
+    $("#spinner").hide();
+    $("#content").fadeIn(200);
   })
   .fail( function() {
+    $("#spinner").hide();
     $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Connection error. Please try again later</div></div>");
     $("#content").fadeIn(200);
   });
