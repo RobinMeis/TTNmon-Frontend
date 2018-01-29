@@ -1,7 +1,7 @@
 var table = null;
 
 function mydevices() {
-  $.getJSON( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key'))
+  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key'), {"dataType": 'json', "timeout": 3000})
 
   .done (function( data ) { //Get table data
     if (data["error"] == 0) {
@@ -33,6 +33,7 @@ function mydevices() {
   .fail(function() {
     $("#error_msg").text("Failed to retrieve devices. Please try again later");
     $("#error_msg").show();
+    $("#device_card").hide();
     $("#spinner").hide();
     $("#content").fadeIn();
     }
