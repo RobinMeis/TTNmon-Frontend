@@ -12,7 +12,8 @@ function dumps() {
         ],
         order: [[0, 'desc']],
         "initComplete": function(settings, json) { //Show table after complete
-          $( "#content" ).fadeIn(200, function() {
+          $("#spinner").hide();
+          $("#content").fadeIn(200, function() {
             table.columns.adjust();
           });
         }
