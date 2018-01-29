@@ -14,6 +14,7 @@ function mydevices() {
           { targets: [6], orderable: false},
         ],
         "initComplete": function(settings, json) { //Show table after complete
+          $("#spinner").hide();
           $( "#content" ).fadeIn(200, function() {
             table.columns.adjust();
           });
@@ -24,14 +25,16 @@ function mydevices() {
     } else {
       $("#error_msg").text(data["msg_en"]);
       $("#error_msg").show();
-      $( "#content" ).fadeIn();
+      $("#spinner").hide();
+      $("#content").fadeIn();
     }
   })
 
   .fail(function() {
     $("#error_msg").text("Failed to retrieve devices. Please try again later");
     $("#error_msg").show();
-    $( "#content" ).fadeIn();
+    $("#spinner").hide();
+    $("#content").fadeIn();
     }
   );
 }
