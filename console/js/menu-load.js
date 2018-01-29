@@ -1,9 +1,14 @@
 var json_pages = null;
 
 $(document).ready(function() {
-  $.getJSON( "pages/pages.json?t=" + Date.now(), function( data ) {
+  $.ajax( "pages/pages.json?t=" + Date.now(), {"dataType": 'json', "timeout": 3000})
+  .done (function( data ) {
     json_pages = data;
     parse_url();
+  })
+  .fail (function() {
+    $("#spinner").hide();
+    $("#content").html("<h1>Failed to retrieve pages definition. Please retry later</h1>");
   });
 });
 
