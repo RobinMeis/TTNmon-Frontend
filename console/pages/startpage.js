@@ -1,5 +1,5 @@
 function startpage() {
-  $.getJSON( "https://api.ttnmon.meis.space/api/stats/")
+  $.ajax( "https://api.ttnmon.meis.space/api/stats/", {"dataType": 'json', "timeout": 3000})
   .done( function( data ) {
     if (data["error"] == 0) {
       $("#registered_devices").text(data["stats"]["devices"]["count"]);
@@ -16,9 +16,8 @@ function startpage() {
     $( "#content" ).fadeIn(200);
   })
   .fail( function() {
-    $( "#content" ).fadeIn(200);
-    $("#registered_devices").hide();
-    $("#authorization_tokens").hide();
-    $("#received_packets").hide();
+    $("#spinner").hide();
+    $("#content").fadeIn(200);
+    $("#icon_cards").hide();
   });
 }
