@@ -9,6 +9,7 @@ function device_gateways() {
 }
 
 function load_gateway(dev_pseudonym, gtw_id, date_start, date_end) {
+  $("#spinner").show();
   $(".gtw_id").text(gtw_id);
   $("#gtw_hide").attr("href", location.hash);
 
@@ -30,9 +31,11 @@ function load_gateway(dev_pseudonym, gtw_id, date_start, date_end) {
       graph_gtw_channel(channel);
       graph_gtw_snr(snr);
       graph_gtw_rssi(rssi);
+      $("#spinner").hide();
       $(".gtw_graph").fadeIn();
     })
     .fail(function() {
+      $("#spinner").hide();
       alert("Request failed");
     });
 }
