@@ -27,16 +27,18 @@ function parse_url() {
 
 function load_page(file, hash) {
   if (file["html"] != "null") {
+    $( "#content" ).fadeOut(200, function() {
+      $("#spinner").show();
       $.get( file["html"] + "?t=" + Date.now(), function(data) {
-        $( "#content" ).fadeOut(200, function() {
           $( "#content" ).html(data);
           window[file["javascript"]](hash);
-        });
       })
       .fail(function() {
-        $( "#content" ).html("Error while loading data. Please try again later");
+        $( "#content" ).html("<p class=\"text-center\"><strong>Error while loading data. Please try again later</strong></p>");
+        $( "#content").fadeIn();
       });
-    }
+    });
+  }
 }
 
 function defaultpage() {
