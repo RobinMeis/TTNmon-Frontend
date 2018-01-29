@@ -24,6 +24,7 @@ function map_page(node) { //Runs on each page load
      }
    });
 
+  $("#spinner").hide();
   $("#content").fadeIn(200, function() {
     mapping.map.invalidateSize();
   });
@@ -48,7 +49,8 @@ class map_page_class {
   }
 
   getGateways(self) {
-    $.getJSON( "https://api.ttnmon.meis.space/api/gateway/list/", function( data ) { //Add gateways to map
+    $.getJSON( "https://api.ttnmon.meis.space/api/gateway/list/")
+    .done (function( data ) { //Add gateways to map
       var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
         if (gateway["latitude"] != null && gateway["longitude"] != null) {
@@ -61,11 +63,19 @@ class map_page_class {
       self.gateways_finished = true;
       self.mapping.showGateways(true);
       self.getLinks(self);
-    });
+    })
+    .fail (function() {
+      $("#btn_gateways").removeClass('active');
+      $("#btn_gateways input").prop("disabled", true);
+      $("#btn_links").removeClass('active');
+      $("#btn_links input").prop("disabled", true);
+      $("#error_boxes").append($('<div class="alert alert-danger">Failed to load gateways. Gateways and links are missing on map. Please retry later</div>').hide().fadeIn(200));
+    })
   }
 
   getNodes(self) {
-    $.getJSON( "https://api.ttnmon.meis.space/api/device/locations/", function( data ) { //Add nodes to map
+    $.getJSON( "https://api.ttnmon.meis.space/api/device/locations/")
+    .done (function( data ) { //Add nodes to map
       var popup_string;
       var found_node = false;
       $.each( data["devices"], function( key, node ) {
@@ -86,21 +96,35 @@ class map_page_class {
       });
 
       if (self.node != null && found_node == false) {
-        $("#map_error").html("Due to missing device coordinates or wrong device id your device was not found. Please add coordinates in the TTN console to show your node on the map.");
+        $("#error_boxes").append($('<div class="alert alert-danger">Due to missing device coordinates or wrong device id your device was not found. Please add coordinates in the TTN console to show your node on the map.</div>').hide().fadeIn(200));
+        $("#spinner").hide();
         $("#map_error").fadeIn();
       }
       self.mapping.showNodes(true);
       self.nodes_finished = true;
       self.getLinks(self);
+    })
+    .fail (function() {
+      $("#btn_nodes").removeClass('active');
+      $("#btn_nodes input").prop("disabled", true);
+      $("#btn_links").removeClass('active');
+      $("#btn_links input").prop("disabled", true);
+      $("#error_boxes").append($('<div class="alert alert-danger">Failed to load nodes. Nodes and links are missing on map. Please retry later</div>').hide().fadeIn(200));
     });
   }
 
   getLinks(self) {
     if (self.gateways_finished && self.nodes_finished) {
-      $.getJSON( "https://api.ttnmon.meis.space/api/links/", function( data ) { //Add nodes to map
+      $.getJSON( "https://api.ttnmon.meis.space/api/links/")
+      .done (function( data ) { //Add nodes to map
         $.each( data["links"], function( key, link ) {
           mapping.addLink(link["gtw_id"], link["dev_pseudonym"], link["snr"]);
         });
+      })
+      .fail (function() {
+        $("#btn_links").removeClass('active');
+        $("#btn_links input").prop("disabled", true);
+        $("#error_boxes").append($('<div class="alert alert-danger">Failed to load links between gateways and nodes. They are missing on map. Please retry later</div>').hide().fadeIn(200));
       });
       self.mapping.showLinks(true);
     }

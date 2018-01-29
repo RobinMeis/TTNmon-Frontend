@@ -4,18 +4,18 @@
     <li class="breadcrumb-item"><a href="#">TTNmon</a></li>
   </ol>
 
-  <div id="map_error" style="display:none;" class="alert alert-danger"></div>
+  <div id="error_boxes"></div>
   <div class="card mb-3">
     <div class="card-body">
       <p>If your device is missing you have probably not set any coordinates in the TTN console. All gateway data is based on the data forwarded by the nodes HTTP integrations.</p>
       <div id="layer_selector" class="btn-group btn-group-sm" data-toggle="buttons">
-        <label class="btn btn-primary active">
+        <label id="btn_gateways" class="btn btn-primary active">
           <input type="checkbox" data-layer="gateways" checked autocomplete="off"> Gateways
         </label>
-        <label class="btn btn-primary active">
+        <label id="btn_nodes" class="btn btn-primary active">
           <input type="checkbox" data-layer="nodes" checked autocomplete="off"> Nodes
         </label>
-        <label class="btn btn-primary active">
+        <label id="btn_links" class="btn btn-primary active">
           <input type="checkbox" data-layer="links" checked autocomplete="off"> Links
         </label>
       </div>
