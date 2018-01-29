@@ -7,8 +7,10 @@ $(document).ready(function() {
     parse_url();
   })
   .fail (function() {
+    $("#content").hide();
     $("#spinner").hide();
-    $("#content").html("<h1>Failed to retrieve pages definition. Please retry later</h1>");
+    $("#content").html("<p class=\"text-center\"><strong>Failed to retrieve pages definition. Please retry later</strong></p>");
+    $("#content").fadeIn();
   });
 });
 
@@ -34,13 +36,15 @@ function load_page(file, hash) {
   if (file["html"] != "null") {
     $( "#content" ).fadeOut(200, function() {
       $("#spinner").show();
-      $.get( file["html"] + "?t=" + Date.now(), function(data) {
+      $.ajax( file["html"] + "?t=" + Date.now(), {"timeout": 3000})
+        .done (function(data) {
           $( "#content" ).html(data);
           window[file["javascript"]](hash);
-      })
-      .fail(function() {
-        $( "#content" ).html("<p class=\"text-center\"><strong>Error while loading data. Please try again later</strong></p>");
-        $( "#content").fadeIn();
+        })
+        .fail(function() {
+          $("#spinner").hide();
+          $("#content").html("<p class=\"text-center\"><strong>Error while loading requested page. Please try again later</strong></p>");
+          $("#content").fadeIn();
       });
     });
   }
