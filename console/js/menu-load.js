@@ -42,5 +42,6 @@ function load_page(file, hash) {
 }
 
 function defaultpage() {
-  $( "#content" ).fadeIn(200);
+  $("#spinner").hide();
+  $("#content").fadeIn(200);
 }
