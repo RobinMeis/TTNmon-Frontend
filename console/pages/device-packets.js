@@ -58,8 +58,9 @@ function get_packets(dev_pseudonym, date_start, date_end) {
 }
 
 function update_date_button() {
-  $( "#content" ).fadeOut(200);
-  $( ".gtw_graph" ).fadeOut(200);
+  $("#content").fadeOut(200);
+  $(".gtw_graph").fadeOut(200);
+  $("#spinner").show();
   $("#update_date").hide();
   get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false);
 }
