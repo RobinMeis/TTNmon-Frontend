@@ -1,3 +1,20 @@
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete device</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <strong class="name"></strong>?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirm_delete">Yes, delete <strong class="name"></strong>!</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal">Abort</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class="container-fluid">
   <!-- Breadcrumbs-->
   <ol class="breadcrumb">
@@ -7,7 +24,7 @@
     <li class="breadcrumb-item">My Authorization</li>
     <li class="breadcrumb-item active">Devices</li>
   </ol>
-  <!-- Introduction-->
+
   <div id="error_msg" style="display:none;" class="alert alert-danger" role="alert"></div>
   <div class="card mb-3">
     <div class="card-header">
