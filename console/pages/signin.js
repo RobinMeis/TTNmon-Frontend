@@ -27,8 +27,10 @@ function signin() { //Runs on each page load
 }
 
 function signin_check(){ //Checks auth key
-  $.getJSON( "https://api.ttnmon.meis.space/api/device/?auth_token=" + $("#auth_key").val())
+  $("#spinner").show();
+  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + $("#auth_key").val(), {"dataType": 'json', "timeout": 3000})
   .done(function( data ) {
+    $("#spinner").hide();
     if (data["error"] == 0) {
       Cookies.set('auth_key', $("#auth_key").val(), { expires: 365, path: '' });
       $("#signin-alert").removeClass("alert-danger");
@@ -48,6 +50,7 @@ function signin_check(){ //Checks auth key
   })
 
   .fail(function() {
+    $("#spinner").hide();
     $("#signin-alert").removeClass("alert-success");
     $("#signin-alert").addClass("alert-danger");
     $("#signin-alert").html("Checking your Authorization Key failed. Please try again later");
