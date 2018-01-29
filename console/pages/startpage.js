@@ -12,6 +12,7 @@ function startpage() {
       $("#received_packets").hide();
       $("#gateways").hide();
     }
+    $( "#spinner" ).hide();
     $( "#content" ).fadeIn(200);
   })
   .fail( function() {
