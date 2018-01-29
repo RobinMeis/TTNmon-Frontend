@@ -11,7 +11,7 @@ function mydevices() {
 
       table = $("#devTable").DataTable({ //jQuery DataTables
         columnDefs: [
-          { targets: [5], orderable: false},
+          { targets: [6], orderable: false},
         ],
         "initComplete": function(settings, json) { //Show table after complete
           $( "#content" ).fadeIn(200, function() {
