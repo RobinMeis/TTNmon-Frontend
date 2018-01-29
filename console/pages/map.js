@@ -49,7 +49,7 @@ class map_page_class {
   }
 
   getGateways(self) {
-    $.getJSON( "https://api.ttnmon.meis.space/api/gateway/list/")
+    $.ajax( "https://api.ttnmon.meis.space/api/gateway/list/", {"dataType": 'json', "timeout": 3000})
     .done (function( data ) { //Add gateways to map
       var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
@@ -74,7 +74,7 @@ class map_page_class {
   }
 
   getNodes(self) {
-    $.getJSON( "https://api.ttnmon.meis.space/api/device/locations/")
+    $.ajax( "https://api.ttnmon.meis.space/api/device/locations/", {"dataType": 'json', "timeout": 3000})
     .done (function( data ) { //Add nodes to map
       var popup_string;
       var found_node = false;
@@ -115,7 +115,7 @@ class map_page_class {
 
   getLinks(self) {
     if (self.gateways_finished && self.nodes_finished) {
-      $.getJSON( "https://api.ttnmon.meis.space/api/links/")
+      $.ajax( "https://api.ttnmon.meis.space/api/links/", {"dataType": 'json', "timeout": 3000})
       .done (function( data ) { //Add nodes to map
         $.each( data["links"], function( key, link ) {
           mapping.addLink(link["gtw_id"], link["dev_pseudonym"], link["snr"]);
