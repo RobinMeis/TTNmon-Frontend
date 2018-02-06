@@ -76,7 +76,7 @@ class mapLinks {
   }
 
   addGateway(gtw_id, latitude, longitude, popup=null) { //Add gateway to map
-    if (this._gateways[gtw_id] == undefined) { //Add only new gateways
+    if (this._gateways[gtw_id] == undefined && latitude != 10 && longitude != 20) { //Add only new gateways and gateways with correct position
       if (popup == null) popup = gtw_id;
       this._gateways[gtw_id] = L.marker([latitude, longitude], {icon: this.gatewayIcon})
         .bindPopup(popup)
