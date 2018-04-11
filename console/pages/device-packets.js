@@ -23,6 +23,15 @@ function get_packets(dev_pseudonym, date_start, date_end) {
           coordinates_string = '<div class="text-muted smaller">' + gateway["lat"] + ' | ' + gateway["lon"];
           if (gateway["alt"] != null)
             coordinates_string += ' | ' + gateway["alt"] + 'm';
+          if (gateway["distance"] != null) {
+            if (gateway["distance"] >= 1000) //km
+              coordinates_string += ' | Distance: ' + Math.round(gateway["distance"] / 100) / 10 + ' km';
+            else { //merters
+              coordinates_string += ' | Distance: ' + Math.round(gateway["distance"]) + ' m';
+
+            }
+          }
+
           coordinates_string += '</div>'
         }
 
