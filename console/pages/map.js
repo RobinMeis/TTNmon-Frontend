@@ -49,7 +49,7 @@ class map_page_class {
   }
 
   getGateways(self) {
-    $.ajax( "https://api.ttnmon.meis.space/api/gateway/list/", {"dataType": 'json', "timeout": 3000})
+    $.ajax( "https://api.ttnmon.meis.space/api/gateway/list/?hide_offline=true", {"dataType": 'json', "timeout": 3000})
     .done (function( data ) { //Add gateways to map
       var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
