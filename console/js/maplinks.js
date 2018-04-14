@@ -100,23 +100,21 @@ class mapLinks {
   addLink(gtw_id, node_pseudonym, snr) { //Add link between gateways and nodes to map
     if (this._gateways[gtw_id] != undefined && this._nodes[node_pseudonym] != undefined) {
       var min_snr = -20;
-      var max_snr = 15;
+      var max_snr = 20;
+      var percentage;
 
-      if (snr <= min_snr) snr = 0; //Calculate percentage based on SNR_min and max
-      else if (snr >= max_snr) snr = 100;
+      if (snr <= min_snr) percentage = 0; //Calculate percentage based on SNR_min and max
+      else if (snr >= max_snr) percentage = 1;
       else {
-        snr = snr - min_snr;
-        max_snr = max_snr - min_snr;
-        min_snr = 0;
-        var factor = 100 / max_snr;
-        snr = snr * factor;
+        snr -= min_snr;
+        max_snr -= min_snr;
+        percentage = 1 - (((100 / max_snr) * snr) / 100);
       }
 
       var latlngs = []
       latlngs.push (this._gateways[gtw_id].getLatLng());
       latlngs.push (this._nodes[node_pseudonym].getLatLng());
-
-      L.polyline(latlngs, {color: getColor(snr / 100)}).addTo(this._linkLayer);
+      L.polyline(latlngs, {color: getColor(percentage)}).addTo(this._linkLayer);
     }
   }
 }
