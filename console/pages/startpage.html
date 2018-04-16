@@ -50,63 +50,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-8">
-      <div class="card mb-3">
-        <div class="card-header">2.000.000 packets received!</div>
-        <div class="card-body">
-          <p>On 11.04.2018 at 06:10:09 UTC the 2.000.000th packet was received by TTNmon. It was sent by <a href="#device-23">this</a> node in Apeldoorn. So it's time for some stats!</p>
-          <p>The database currently holds the data of 66 nodes sending their packets to 408 gateways. The packet table grows by about 17.000 packets per day. This table only stores the nodes information like packet time, counter or spreading factor. The main table which holds the link quality for each gateway which heard a packet stores currently 4.540.309 rows. It grows by ~34.000 rows per day.</p>
-          <p>The packet table has a size of ~185 MB. The table storing link quality has a size of ~490 MB. The total database size including user and device table is about 680 MB which caused TTNmon becoming slow and unstable at my shared hosting provider within a short time after the public launch.</p>
-          <p>In the beginning I cared less for database and dump size. Starting compressing them during the dump process significantly decreased the dumps size. But as of today even the compressed database dumps reached a size of 100 MB.</p>
-          <p>When I introduced the Map the data was generated every 10 minutes by a cronjob. Later the cronjob started to hit memory limits. Even the basic job which created a list of all known gateways ran longer than 10 minutes. The job to process the colored links between nodes and gateways ran into timeout. The problem was fixed a few days ago. Now the required information are collected instantly when a new packet is received. This means that the map became more dynamic while the server has lower loads.</p>
-          <p>As previously mentioned, TTNmon started to hit my hosters limits. Thanks to the support of the <a target="_blank" href="https://www.thethingsnetwork.org/community/aachen/">TTN Community Aachen</a> and <a target="_blank" href="https://ccc.ac/">CCCAC</a> I'm able to run TTNmon on a virtual server which provides the required ressources.</p>
-          <p>Looking forward to 5.000.000 packets which should be reached within the next five to six months.</p>
-        </div>
-        <div class="card-footer small text-muted">15.04.2018 - 00:03</div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-header">IoT clocks</div>
-        <div class="card-body">
-          <p>If you took a short look around on the new map, you may have found some nodes in Berlin near to the train stations Hauptbahnhof and Jannowitzbr&uuml;cke. Just looking around on Twitter for TTNmon I found it's purpose:</p>
-          <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Installation of IoT-station-clocks taking place in Berlin today. Very exciting! <a href="https://twitter.com/hashtag/LoRaWAN?src=hash&amp;ref_src=twsrc%5Etfw">#LoRaWAN</a> <a href="https://twitter.com/hashtag/DB?src=hash&amp;ref_src=twsrc%5Etfw">#DB</a> <a href="https://twitter.com/RecumbentTravel?ref_src=twsrc%5Etfw">@RecumbentTravel</a> <a href="https://twitter.com/TTN_Berlin?ref_src=twsrc%5Etfw">@TTN_Berlin</a> <a href="https://t.co/2xoHZfPwib">pic.twitter.com/2xoHZfPwib</a></p>&mdash; Olga Willner (@OlgaWillner) <a href="https://twitter.com/OlgaWillner/status/857248129694957569?ref_src=twsrc%5Etfw">April 26, 2017</a></blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-          <p>Thanks for sharing these nodes with TTNmon!</p>
-          <p>
-            Nodes
-            <ul>
-              <li><a href="#device-15">Jannowitzbr&uuml;cke</a></li>
-              <li><a href="#device-16">Hauptbahnhof 1</a></li>
-              <li><a href="#device-19">Hauptbahnhof 2</a></li>
-            </ul>
-          </p>
-          <p>
-            Related articles
-            <ul>
-              <li><a target="_blank" href="http://www.deutschebahn.com/de/konzern/im_blickpunkt/13090810/20170104_ausbildung.html">Deutsche Bahn (German)</a></li>
-              <li><a target="_blank" href="https://www.heise.de/newsticker/meldung/Fernueberwachung-fuer-Bahnhofsuhren-3592831.html">Heise (German)</a></li>
-            </ul>
-          </p>
-        </div>
-        <div class="card-footer small text-muted">25.01.2018 - 22:32</div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-header">Map is finally there!</div>
-        <div class="card-body">
-          <p>Finally TTNmon has a <a href="#map">map</a> to show the tracked nodes and seen gateways. If you don't have privacy concerns or a moving device, please add your nodes coordinates in the TTN console. This way the data becomes more interesting for all of us.</p>
-          <p><strong>UPDATE 1</strong> The map shows the link between the node and the gateways which received the packets. The lines color indicates the SNR</p>
-          <img class="img-fluid" src="img/blog/map.png">
-          <p><strong>UPDATE 2</strong> Now there is a <a href="#map-16">detailed</a> view for nodes.</p>
-          <p><strong>UPDATE 3</strong> Layers for Gateways, Nodes and Links can be disabled. You can choose between three different map layers: OpenStreetMap, OpenTopoMap, Toner Lite</p>
-        </div>
-        <div class="card-footer small text-muted">24.01.2018 - 19:11</div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-header">Welcome to TTNmon</div>
-        <div class="card-body">
-          TTNmon is currently &beta;. Take a look around but don't expect too much. Please visit the <a href="#faq">FAQ</a> for setup instructions
-        </div>
-        <div class="card-footer small text-muted">14.01.2018 - 02:11</div>
-      </div>
+    <div class="col-lg-8" id="blog">
+
+
     </div>
     <div class="col-lg-4">
       <!-- Interesting devices Card-->
