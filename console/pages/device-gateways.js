@@ -19,18 +19,29 @@ function load_gateway(dev_pseudonym, gtw_id, date_start, date_end) {
   $.ajax( "https://api.ttnmon.meis.space/api/gateway/device/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end + "&gtw_id=" + gtw_id, {"dataType": 'json', "timeout": 10000})
     .done(function(data) {
       var channel = [];
-      var snr = [];
-      var rssi = [];
+      var snr_series = [];
+      var rssi_series = []
 
       $.each(data["packets"], function(index, packet) {
         date = Date.parse(packet["time"])
         channel.push([date, packet["channel"]]);
-        snr.push([date, packet["snr"]]);
-        rssi.push([date, packet["rssi"]]);
+
+        if (typeof snr_series[packet["channel"]] !== 'undefined') {
+          snr_series[packet["channel"]].push([date, packet["rssi"]]);
+        } else {
+          snr_series[packet["channel"]] = [[date, packet["rssi"]]];
+        }
+
+        if (typeof rssi_series[packet["channel"]] !== 'undefined') {
+          rssi_series[packet["channel"]].push([date, packet["rssi"]]);
+        } else {
+          rssi_series[packet["channel"]] = [[date, packet["rssi"]]];
+        }
       });
+
       graph_gtw_channel(channel);
-      graph_gtw_snr(snr);
-      graph_gtw_rssi(rssi);
+      graph_gtw_snr(snr_series);
+      graph_gtw_rssi(rssi_series);
       $("#spinner").hide();
       $(".gtw_graph").fadeIn();
     })
@@ -86,6 +97,18 @@ function graph_gtw_channel(data) {
 }
 
 function graph_gtw_snr(data) {
+  data_series = [];
+  $.each(data, function(index, series) {
+    if (series != undefined) {
+      console.log(series);
+      data_series.push({
+        type: 'line',
+        name: "Channel " + index,
+        data: series
+      });
+    }
+  });
+
   Highcharts.chart('chart_snr_gtw', {
       chart: {
           zoomType: 'x'
@@ -102,7 +125,7 @@ function graph_gtw_snr(data) {
           }
       },
       legend: {
-          enabled: false
+          enabled: true
       },
       plotOptions: {
           area: {
@@ -119,14 +142,23 @@ function graph_gtw_snr(data) {
           }
       },
 
-      series: [{
-          type: 'line',
-          data: data
-      }]
+      series: data_series
   });
 }
 
 function graph_gtw_rssi(data) {
+  data_series = [];
+  $.each(data, function(index, series) {
+    if (series != undefined) {
+      console.log(series);
+      data_series.push({
+        type: 'line',
+        name: "Channel " + index,
+        data: series
+      });
+    }
+  });
+
   Highcharts.chart('chart_rssi_gtw', {
       chart: {
           zoomType: 'x'
@@ -143,7 +175,7 @@ function graph_gtw_rssi(data) {
           }
       },
       legend: {
-          enabled: false
+          enabled: true
       },
       plotOptions: {
           area: {
@@ -160,9 +192,6 @@ function graph_gtw_rssi(data) {
           }
       },
 
-      series: [{
-          type: 'line',
-          data: data
-      }]
+      series: data_series
   });
 }
