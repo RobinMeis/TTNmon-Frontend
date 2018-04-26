@@ -100,7 +100,6 @@ function graph_gtw_snr(data) {
   data_series = [];
   $.each(data, function(index, series) {
     if (series != undefined) {
-      console.log(series);
       data_series.push({
         type: 'line',
         name: "Channel " + index,
@@ -150,7 +149,6 @@ function graph_gtw_rssi(data) {
   data_series = [];
   $.each(data, function(index, series) {
     if (series != undefined) {
-      console.log(series);
       data_series.push({
         type: 'line',
         name: "Channel " + index,
