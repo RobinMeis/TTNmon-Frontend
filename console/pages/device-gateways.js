@@ -27,9 +27,9 @@ function load_gateway(dev_pseudonym, gtw_id, date_start, date_end) {
         channel.push([date, packet["channel"]]);
 
         if (typeof snr_series[packet["channel"]] !== 'undefined') {
-          snr_series[packet["channel"]].push([date, packet["rssi"]]);
+          snr_series[packet["channel"]].push([date, packet["snr"]]);
         } else {
-          snr_series[packet["channel"]] = [[date, packet["rssi"]]];
+          snr_series[packet["channel"]] = [[date, packet["snr"]]];
         }
 
         if (typeof rssi_series[packet["channel"]] !== 'undefined') {
