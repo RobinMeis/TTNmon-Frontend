@@ -24,7 +24,7 @@ class mapLinks {
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    this._map = L.map(this._mapContainer).setView([40, 0], 3);
+    this._map = L.map(this._mapContainer, {fullscreenControl: true}).setView([40, 0], 3);
     L.Control.measureControl().addTo(this._map);
     this._osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(this._map);
     this._otmLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a> contributors'});
