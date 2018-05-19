@@ -54,6 +54,7 @@ class map_page_class {
       var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
         if (gateway["latitude"] != null && gateway["longitude"] != null) {
+          if (gateway["description"] == null) gateway["description"] = ""; //Hide empty descriptions
           popup_string = "<strong>" + gateway["gtw_id"] + "</strong><br><i>" + gateway["description"] + "</i><br>First seen: " + gateway["first_seen"] + "<br>Last seen: " + gateway["last_seen"] + "<br>Packets: " + gateway["packets"] + "<br><small>" + gateway["latitude"] + " | " + gateway["longitude"];
           if (gateway["altitude"] == null) popup_string += "</small>"
           else popup_string += " | " + gateway["altitude"] + "m</small>"
