@@ -39,7 +39,7 @@ class map_page_class {
 
     if (node == null) $(".breadcrumb").append('<li class="breadcrumb-item">Map</li>'); //Generate breadcrumb
     else {
-      $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">Showing only node ' + node + '</li>');
+      $(".breadcrumb").append('<li class="breadcrumb-item"><a href="#map">Map</a></li><li class="breadcrumb-item active">Node ' + node + '</li>');
       $("#show_node a").attr('href', '#device-' + node);
       $("#show_node").show();
     }
@@ -54,7 +54,7 @@ class map_page_class {
       var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
         if (gateway["latitude"] != null && gateway["longitude"] != null) {
-          popup_string = "<strong>" + gateway["gtw_id"] + "</strong><br>First seen: " + gateway["first_seen"] + "<br>Last seen: " + gateway["last_seen"] + "<br>Channels: " + gateway["channels"] + "<br>Packets: " + gateway["packets"] + "<br><small>" + gateway["latitude"] + " | " + gateway["longitude"];
+          popup_string = "<strong>" + gateway["gtw_id"] + "</strong><br><i>" + gateway["description"] + "</i><br>First seen: " + gateway["first_seen"] + "<br>Last seen: " + gateway["last_seen"] + "<br>Packets: " + gateway["packets"] + "<br><small>" + gateway["latitude"] + " | " + gateway["longitude"];
           if (gateway["altitude"] == null) popup_string += "</small>"
           else popup_string += " | " + gateway["altitude"] + "m</small>"
           self.mapping.addGateway(gateway["gtw_id"], gateway["latitude"], gateway["longitude"], popup_string);
@@ -82,7 +82,7 @@ class map_page_class {
         if (node["latitude"] != null && node["longitude"] != null && (self.node == null || self.node == node["pseudonym"])) {
           popup_string = "<br>First seen: " + node["created"] + "<br>Last seen: " + node["last_seen"] + "<br>";
           if (self.node == null) //Hide "show only this node" if only a sigle node is shown
-            popup_string += "<a href=\"#map-" + node["pseudonym"] + "\"><strong>Show only this node</strong></a> | ";
+            popup_string += "<a href=\"#map-" + node["pseudonym"] + "\"><strong>Hide other nodes</strong></a> | ";
           popup_string += "<a href=\"#device-" + node["pseudonym"] + "\"><strong>Details</strong></a><br><small>" + node["latitude"] + " | " + node["longitude"];
           if (node["altitude"] == null) popup_string += "</small>"
           else popup_string += " | " + node["altitude"] + "m</small>"
