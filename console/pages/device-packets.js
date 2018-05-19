@@ -35,7 +35,7 @@ function get_packets(dev_pseudonym, date_start, date_end) {
           coordinates_string += '</div>'
         }
 
-        $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gateway["gtw_id"] + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + coordinates_string + '</div></div></a>');
+        $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gateway["gtw_id"] + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gateway["gtw_id"] + '</strong><br><span class="font-weight-light">' + gateway["description"] + '</span><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["rssi_min"] + '<br>RSSI max: ' + gateway["rssi_max"] + '<br>SNR min: ' + gateway["snr_min"] + '<br>SNR max: ' + gateway["snr_max"] + coordinates_string + '</div></div></a>');
       });
 
       spreading_factor = []; //Prepare graphs
