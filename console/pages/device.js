@@ -3,7 +3,7 @@ function device(hash) {
     $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Invalid device request</div></div>");
     $("#content").fadeIn(200);
   } else {
-    $("#pseudonym_id").text(hash[1]);
+    $("#pseudonym_id").text("Device " + hash[1]);
     $("#maplink").attr("href", "#map-" + hash[1]);
 
     var options={ //Configure datepickers
@@ -36,6 +36,20 @@ function device(hash) {
     });
 
     get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false); //Get packets for (default) date range
+    get_device_details();
     $("#update_date").click(update_date_button);
   }
+}
+
+function get_device_details() {
+  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&pseudonym=" + hash[1], {"dataType": 'json', "timeout": 3000})
+
+  .done (function( data ) { //Get table data
+    if (data["error"] == 0) {
+      $("#breadcrumb_pseudonym").remove();
+      $("#breadcrumb").append('<li class="breadcrumb-item">' + data["app_id"] + '</li><li class="breadcrumb-item active">' + data["dev_id"] + ' <span class="font-weight-light">' + data["deveui"] + "</span></li>");
+    }
+  }
+
+  );
 }
