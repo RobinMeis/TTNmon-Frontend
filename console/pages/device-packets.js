@@ -4,7 +4,7 @@ function get_packets(dev_pseudonym, date_start, date_end) {
   date_end.setSeconds(59);
   var string_start = date_start.getFullYear() + "-" + (date_start.getMonth() + 1) + "-" + date_start.getDate();
   var string_end = date_end.getFullYear() + "-" + (date_end.getMonth() + 1) + "-" + date_end.getDate() + " " + date_end.getHours() + ":" + date_end.getMinutes() + ":" + date_end.getSeconds();
-  $.ajax( "https://api.ttnmon.meis.space/api/packet/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end, {"dataType": 'json', "timeout": 10000})
+  $.ajax( "https://api.ttnmon.meis.space/api/packet/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end + "&timezone_offset=" + get_timeOffset(), {"dataType": 'json', "timeout": 10000})
   .done( function( data ) {
     if (data["error"] != 0) {
       $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">" + data["msg_en"] + "</div></div>");
@@ -50,6 +50,12 @@ function get_packets(dev_pseudonym, date_start, date_end) {
         packet_count.push([date, packet["packet_count"]]);
     		gateway_count.push([date, packet["gateway_count"]]);
     	});
+
+      Highcharts.setOptions({ //Set timezone for graphing
+        time: {
+            timezoneOffset: get_timeOffset()
+        }
+      });
 
       graph_frequency(frequency); //Generate graphs
       graph_spreading_factor(spreading_factor);

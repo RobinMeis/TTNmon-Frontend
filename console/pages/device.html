@@ -69,7 +69,14 @@
                     </span>
                 </div>
             </div>
-            <span class="small">All dates are UTC</span><br>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-light btn-sm" id="timezone_utc">
+                <input type="radio" name="timezone" value="utc" autocomplete="off"> UTC
+              </label>
+              <label class="btn btn-sm btn-light" id="timezone_local">
+                <input type="radio" name="timezone" value="local" autocomplete="off"> Local Time
+              </label>
+            </div><br>
             <button id="update_date" style="display:none;" type="button" class="btn btn-outline-success btn-sm">Apply changes</button>
         </div>
       </div>
