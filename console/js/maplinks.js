@@ -98,24 +98,33 @@ class mapLinks {
       return false;
   }
 
-  addLink(gtw_id, node_pseudonym, snr) { //Add link between gateways and nodes to map
+  addLink(gtw_id, gtw_lat, gtw_lon, node_pseudonym, node_lat, node_lon, snr) { //Add link between gateways and nodes to map
     if (this._gateways[gtw_id] != undefined && this._nodes[node_pseudonym] != undefined) {
-      var min_snr = -20;
-      var max_snr = 20;
-      var percentage;
-
-      if (snr <= min_snr) percentage = 0; //Calculate percentage based on SNR_min and max
-      else if (snr >= max_snr) percentage = 1;
-      else {
-        snr -= min_snr;
-        max_snr -= min_snr;
-        percentage = 1 - (((100 / max_snr) * snr) / 100);
-      }
-
       var latlngs = []
-      latlngs.push (this._gateways[gtw_id].getLatLng());
-      latlngs.push (this._nodes[node_pseudonym].getLatLng());
-      L.polyline(latlngs, {color: getColor(percentage)}).addTo(this._linkLayer);
+      var gtw_latlng = this._gateways[gtw_id].getLatLng();
+      var node_latlng = this._nodes[node_pseudonym].getLatLng();
+
+      //if (gtw_latlng.lat == gtw_lat && gtw_latlng.lon == gtw_lon && node_latlng.lat == node_lat && node.node_latlng.lon == node_lon) {
+      if (gtw_latlng.lat == gtw_lat && gtw_latlng.lng == gtw_lon && node_latlng.lat == node_lat && node_latlng.lng == node_lon) {
+        var min_snr = -20;
+        var max_snr = 20;
+        var percentage;
+
+        if (snr <= min_snr) percentage = 0; //Calculate percentage based on SNR_min and max
+        else if (snr >= max_snr) percentage = 1;
+        else {
+          snr -= min_snr;
+          max_snr -= min_snr;
+          percentage = 1 - (((100 / max_snr) * snr) / 100);
+        }
+
+        latlngs.push (gtw_latlng);
+        latlngs.push (node_latlng);
+
+        L.polyline(latlngs, {color: getColor(percentage)}).addTo(this._linkLayer);
+      } else {
+        console.log("moved node " + node_pseudonym)
+      }
     }
   }
 }

@@ -119,7 +119,9 @@ class map_page_class {
       $.ajax( "https://api.ttnmon.meis.space/api/links/", {"dataType": 'json', "timeout": 3000})
       .done (function( data ) { //Add nodes to map
         $.each( data["links"], function( key, link ) {
-          mapping.addLink(link["gtw_id"], link["dev_pseudonym"], link["snr"]);
+          if (link["distance"] != null && link["distance"] < 400000) {
+            mapping.addLink(link["gtw_id"], link["coordinates"]["gateway"]["lat"], link["coordinates"]["gateway"]["lon"], link["dev_pseudonym"], link["coordinates"]["node"]["lat"], link["coordinates"]["node"]["lon"], link["snr"]);
+          }
         });
       })
       .fail (function() {
