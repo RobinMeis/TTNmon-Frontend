@@ -10,7 +10,7 @@ function gateways() {
         $("#devTable tbody").append("<tr data-name=\"" + gateway["gtw_id"] + "\" id=\"" + gateway["gtw_id"] + "\"><td>" + gateway["gtw_id"] + "</td><td>" + gateway["first_seen"] + "</td><td>" + gateway["last_seen"] + "</td><td>" + gateway["packets"] + "</td><td>" + gateway["description"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a></td></tr>");
       });
 
-      table = $("#devTable").DataTable({ //jQuery DataTables
+      table = $("#gtwTable").DataTable({ //jQuery DataTables
         columnDefs: [
           { targets: [4,5], orderable: false},
         ],
