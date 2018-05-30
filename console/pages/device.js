@@ -1,6 +1,7 @@
 function device(hash) {
   if (hash[1] == undefined) {
     $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Invalid device request</div></div>");
+    $("#spinner").hide();
     $("#content").fadeIn(200);
   } else {
     timezoneButtons(); //Configure timezone
