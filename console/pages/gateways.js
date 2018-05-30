@@ -7,7 +7,7 @@ function gateways() {
     if (data["error"] == 0) {
       $.each(data["gateways"], function( key, gateway ) {
         if (gateway["description"] == null) gateway["description"] = "";
-        $("#devTable tbody").append("<tr data-name=\"" + gateway["gtw_id"] + "\" id=\"" + gateway["gtw_id"] + "\"><td>" + gateway["gtw_id"] + "</td><td>" + gateway["first_seen"] + "</td><td>" + gateway["last_seen"] + "</td><td>" + gateway["packets"] + "</td><td>" + gateway["description"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a></td></tr>");
+        $("#gtwTable tbody").append("<tr data-name=\"" + gateway["gtw_id"] + "\" id=\"" + gateway["gtw_id"] + "\"><td>" + gateway["gtw_id"] + "</td><td>" + gateway["first_seen"] + "</td><td>" + gateway["last_seen"] + "</td><td>" + gateway["packets"] + "</td><td>" + gateway["description"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a></td></tr>");
       });
 
       table = $("#gtwTable").DataTable({ //jQuery DataTables
