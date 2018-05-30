@@ -19,14 +19,12 @@ function device(hash) {
 
 function get_device_details() {
   $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&pseudonym=" + hash[1], {"dataType": 'json', "timeout": 3000})
-
-  .done (function( data ) { //Get table data
-    if (data["error"] == 0) {
-      $("#breadcrumb_pseudonym").remove();
-      $("#breadcrumb").append('<li class="breadcrumb-item">' + data["app_id"] + '</li><li class="breadcrumb-item active">' + data["dev_id"] + ' <span class="font-weight-light">' + data["deveui"] + "</span></li>");
+    .done (function( data ) { //Get table data
+      if (data["error"] == 0) {
+        $("#breadcrumb_pseudonym").remove();
+        $("#breadcrumb").append('<li class="breadcrumb-item">' + data["app_id"] + '</li><li class="breadcrumb-item active">' + data["dev_id"] + ' <span class="font-weight-light">' + data["deveui"] + "</span></li>");
+      }
     }
-  }
-
   );
 }
 
