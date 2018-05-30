@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">TTNmon</a></li>
+    <li class="breadcrumb-item"><a href="#gateways">Gateways</a></li>
+    <li class="breadcrumb-item active" id="gtw_eui"></li>
+    <li class="breadcrumb-item active">Nodes</li>
+  </ol>
+
+  <div id="error_msg" style="display:none;" class="alert alert-danger" role="alert"></div>
+  <div id="device_card" class="card mb-3">
+    <div class="card-header">
+      <i class="fa fa-cubes"></i> Nodes</div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="nodeTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Dev Pseudonym</th>
+              <th>Last Seen (UTC)</th>
+              <th>SNR</th>
+              <th>Distance (km)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Dev Pseudonym</th>
+              <th>Last Seen (UTC)</th>
+              <th>SNR</th>
+              <th>Distance (km)</th>
+              <th></th>
+            </tr>
+          </tfoot>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
