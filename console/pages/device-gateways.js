@@ -1,6 +1,8 @@
 function device_gateways() {
   $(".gateway_select").click(function(e) { //Gateway button click
-    load_gateway(hash[1], $(this).attr('id'), $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"));
+    var gtw_id = $(this).attr('id');
+    update_hash(hash[0] + "-" + hash[1] + "-" + hash[2] + "-" + hash[3] + "-" + gtw_id, true);
+    load_gateway(hash[1], gtw_id, $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"));
   });
 
   $("#gtw_hide").click(function(e) { //Gateway button click

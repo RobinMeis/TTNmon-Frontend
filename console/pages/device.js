@@ -1,15 +1,23 @@
 function device(hash) {
   if (hash[1] == undefined) {
     $("#content").html("<div class=\"container-fluid\"><div class=\"alert alert-danger\">Invalid device request</div></div>");
+    $("#spinner").hide();
     $("#content").fadeIn(200);
   } else {
+    if (hash[2] != null && hash[3] != null) {
+      var date_start = moment(hash[2],"DD.MM.YYYY");
+      var date_end = moment(hash[3],"DD.MM.YYYY");
+    } else {
+      var date_start = null;
+      var date_end = null;
+    }
     timezoneButtons(); //Configure timezone
     $('input[type=radio][name=timezone]').change(timezone_change); //Timezone change button
 
     $("#pseudonym_id").text("Device " + hash[1]);
     $("#maplink").attr("href", "#map-" + hash[1]);
 
-    setup_datepickers();
+    setup_datepickers(date_start, date_end);
     get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false); //Get packets for (default) date range
     get_device_details();
     $("#update_date").click(update_date_button);
@@ -18,18 +26,16 @@ function device(hash) {
 
 function get_device_details() {
   $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&pseudonym=" + hash[1], {"dataType": 'json', "timeout": 3000})
-
-  .done (function( data ) { //Get table data
-    if (data["error"] == 0) {
-      $("#breadcrumb_pseudonym").remove();
-      $("#breadcrumb").append('<li class="breadcrumb-item">' + data["app_id"] + '</li><li class="breadcrumb-item active">' + data["dev_id"] + ' <span class="font-weight-light">' + data["deveui"] + "</span></li>");
+    .done (function( data ) { //Get table data
+      if (data["error"] == 0) {
+        $("#breadcrumb_pseudonym").remove();
+        $("#breadcrumb").append('<li class="breadcrumb-item">' + data["app_id"] + '</li><li class="breadcrumb-item active">' + data["dev_id"] + ' <span class="font-weight-light">' + data["deveui"] + "</span></li>");
+      }
     }
-  }
-
   );
 }
 
-function setup_datepickers() {
+function setup_datepickers(date_start=null, date_end=null) {
   var options={ //Configure datepickers
     format: 'dd.mm.yyyy',
     todayHighlight: true,
@@ -41,14 +47,20 @@ function setup_datepickers() {
   $("#date_end").datepicker(options);
 
   var now = new Date();
-  if (Cookies.get('timezone') == 'local') { //Set dates
-    var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
-    var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
+  if (date_start != null && date_end != null) {
+    var start = date_start.toDate();
+    var end = date_end.toDate();
   } else {
-    var start = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-    var end = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+    if (Cookies.get('timezone') == 'local') { //Set dates
+      var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
+      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
+    } else {
+      var start = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+      var end = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+    }
+    start.setDate(start.getDate() - 7);
+    update_hash(hash[0] + "-" + hash[1] + "-" + start.getDate() + "." + (start.getMonth() + 1) + "." + start.getFullYear() + "-" + end.getDate() + "." + (end.getMonth() + 1) + "." + end.getFullYear(), true); //Update hash with new dates
   }
-  start.setDate(start.getDate() - 7);
   $('#date_start').datepicker("setDate", start);
   $('#date_end').datepicker("setDate", end);
   $('#date_end').datepicker("setStartDate", start);

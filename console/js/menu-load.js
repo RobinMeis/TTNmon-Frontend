@@ -1,6 +1,12 @@
 var json_pages = null;
-
+var update_on_hashchange = true;
 $(document).ready(function() {
+  if (window.location.hostname == "test.ttnmon.meis.space") { //Shows back to stable if on Beta
+    $("#side-menu").append('<li style="background-color:#cc0000;" class="nav-item" data-toggle="tooltip" data-placement="right" title="Experimental"><a class="nav-link" href="https://ttnmon.meis.space/"><i class="fa fa-fw fa-flask"></i><span class="nav-link-text">Back to stable?<br><small>You are currently on Beta</small></span></a></li>');
+  } else if (!window.location.hostname == "localhost") {
+    $("#side-menu").append('<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Experimental"><a class="nav-link" href="https://test.ttnmon.meis.space/"><i class="fa fa-fw fa-flask"></i><span class="nav-link-text">Experimental<br><small>Test the latest commits in Beta</small></span></a></li>');
+  }
+
   $.ajax( "pages/pages.json?t=" + Date.now(), {"dataType": 'json', "timeout": 3000})
   .done (function( data ) {
     json_pages = data;
@@ -15,7 +21,19 @@ $(document).ready(function() {
 });
 
 window.onhashchange = function(){
-  parse_url();
+  if (update_on_hashchange) parse_url();
+}
+
+function update_hash(new_hash, block) { //Change hash without reloading page
+  if (block) update_on_hashchange = false;
+
+  setTimeout(function(){
+    location.hash = new_hash;
+  }, 1000);
+  setTimeout(function(){
+    update_on_hashchange = true;
+    hash = new_hash.split("-");
+  }, 2000);
 }
 
 function parse_url() {

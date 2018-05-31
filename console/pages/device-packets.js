@@ -63,8 +63,16 @@ function get_packets(dev_pseudonym, date_start, date_end) {
       graph_gateway_count(gateway_count);
       device_gateways(); //Initialize gateway functions
     }
-    $("#spinner").hide();
+
     $("#content").fadeIn(200);
+    if (hash[4] == undefined) { //No gateway in URL
+      $("#spinner").hide();
+    } else { //Assemble Gateway EUI and Load Data
+        var gtw_eui = hash;
+        gtw_eui.splice(0,4);
+        gtw_eui = gtw_eui.join("-");
+        load_gateway(dev_pseudonym, gtw_eui, date_start, date_end);
+    }
   })
   .fail( function() {
     $("#spinner").hide();
@@ -78,7 +86,10 @@ function update_date_button() {
   $(".gtw_graph").fadeOut(200);
   $("#spinner").show();
   $("#update_date").hide();
-  get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false);
+  var date_start = $('#date_start').datepicker("getDate");
+  var date_end = $('#date_end').datepicker("getDate");
+  get_packets(hash[1], date_start, date_end, false);
+  update_hash(hash[0] + "-" + hash[1] + "-" + date_start.getDate() + "." + (date_start.getMonth() + 1) + "." + date_start.getFullYear() + "-" + date_end.getDate() + "." + (date_end.getMonth() + 1) + "." + date_end.getFullYear(), true); //Update hash with new dates
 }
 
 function graph_frequency(data) {

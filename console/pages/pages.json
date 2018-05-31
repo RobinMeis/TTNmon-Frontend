@@ -8,5 +8,7 @@
   "#device": {"javascript": "device", "html": "pages/device.html"},
   "#map": {"javascript": "map_page", "html": "pages/map.html"},
   "#faq": {"javascript": "faq", "html": "pages/faq.html"},
-  "#dumps": {"javascript": "dumps", "html": "pages/dumps.html"}
+  "#dumps": {"javascript": "dumps", "html": "pages/dumps.html"},
+  "#gateways": {"javascript": "gateways", "html": "pages/gateways.html"},
+  "#gtwnodes": {"javascript": "gtwnodes", "html": "pages/gtwnodes.html"}
 }

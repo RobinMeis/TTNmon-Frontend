@@ -50,7 +50,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      <ul class="navbar-nav navbar-sidenav" id="side-menu">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Startpage">
           <a class="nav-link" href="#" id="startpage">
             <i class="fa fa-fw fa-dashboard"></i>
@@ -61,6 +61,12 @@
           <a class="nav-link" href="#map" id="startpage">
             <i class="fa fa-fw fa-map"></i>
             <span class="nav-link-text">Map</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Gateways">
+          <a class="nav-link" href="#gateways">
+            <i class="fa fa-fw fa-wifi"></i>
+            <span class="nav-link-text">Gateways</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Authorization">
@@ -172,7 +178,7 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-    <script src="js/menu-load.js"></script>
+    <script src="js/menu-load.js?ver=1.0.2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
@@ -183,17 +189,25 @@
     <script src="js/leaflet.measurecontrol.js?1.0.1"></script>
     <script src="js/maplinks.js?1.0.4"></script>
 
-    <script src="pages/startpage.js?ver=1.1"></script>
+    <!--
+    Versions
+    First digit is nearly never incremented
+    Second digit is incremented for every merged release
+    Third digit is incremented for every pushed release
+    -->
+    <script src="pages/startpage.js?ver=1.1.1"></script>
     <script src="pages/getauthkey.js?ver=1.0"></script>
     <script src="pages/signin.js?ver=1.0"></script>
-    <script src="pages/mydevices.js?ver=1.0"></script>
+    <script src="pages/mydevices.js?ver=1.1.0"></script>
     <script src="pages/search.js?ver=1.0"></script>
-    <script src="pages/device.js?ver=1.1.0"></script>
-    <script src="pages/device-packets.js?ver=1.2.0"></script>
-    <script src="pages/device-gateways.js?ver=1.2.0"></script>
+    <script src="pages/device.js?ver=1.1.1"></script>
+    <script src="pages/device-packets.js?ver=1.2.2"></script>
+    <script src="pages/device-gateways.js?ver=1.2.1"></script>
     <script src="pages/map.js?ver=1.0.3"></script>
     <script src="pages/faq.js?ver=1.0"></script>
     <script src="pages/dumps.js?ver=1.0"></script>
+    <script src="pages/gateways.js?ver=1.0.3"></script>
+    <script src="pages/gtwnodes.js?ver=1.0.0"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
