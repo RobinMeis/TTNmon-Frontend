@@ -115,7 +115,7 @@ class mapLinks {
         else {
           snr -= min_snr;
           max_snr -= min_snr;
-          percentage = 1 - (((100 / max_snr) * snr) / 100);
+          percentage = ((100 / max_snr) * snr) / 100;
         }
 
         latlngs.push (gtw_latlng);
