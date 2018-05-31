@@ -28,7 +28,7 @@ function update_hash(hash, block) { //Change hash without reloading page
   update_on_hashchange = false;
   setTimeout(function(){
     location.hash = hash;
-    pdate_on_hashchange = true;
+    update_on_hashchange = true;
   }, 50);
 }
 
