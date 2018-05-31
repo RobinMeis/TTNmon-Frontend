@@ -63,8 +63,16 @@ function get_packets(dev_pseudonym, date_start, date_end) {
       graph_gateway_count(gateway_count);
       device_gateways(); //Initialize gateway functions
     }
-    $("#spinner").hide();
+
     $("#content").fadeIn(200);
+    if (hash[4] == undefined) { //No gateway in URL
+      $("#spinner").hide();
+    } else { //Assemble Gateway EUI and Load Data
+        var gtw_eui = hash;
+        gtw_eui.splice(0,4);
+        gtw_eui = gtw_eui.join("-");
+        load_gateway(dev_pseudonym, gtw_eui, date_start, date_end);
+    }
   })
   .fail( function() {
     $("#spinner").hide();
