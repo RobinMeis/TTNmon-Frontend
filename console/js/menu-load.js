@@ -24,12 +24,16 @@ window.onhashchange = function(){
   if (update_on_hashchange) parse_url();
 }
 
-function update_hash(hash, block) { //Change hash without reloading page
-  update_on_hashchange = false;
+function update_hash(new_hash, block) { //Change hash without reloading page
+  if (block) update_on_hashchange = false;
+
   setTimeout(function(){
-    location.hash = hash;
+    location.hash = new_hash;
+  }, 1000);
+  setTimeout(function(){
     update_on_hashchange = true;
-  }, 50);
+    hash = new_hash.split("-");
+  }, 2000);
 }
 
 function parse_url() {
