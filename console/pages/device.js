@@ -50,14 +50,16 @@ function setup_datepickers(date_start=null, date_end=null) {
   if (date_start != null && date_end != null) {
     var start = date_start.toDate();
     var end = date_end.toDate();
-  } else if (Cookies.get('timezone') == 'local') { //Set dates
-    var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
-    var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
-    start.setDate(start.getDate() - 7);
   } else {
-    var start = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-    var end = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+    if (Cookies.get('timezone') == 'local') { //Set dates
+      var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
+      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(),  now.getHours(), now.getMinutes(), now.getSeconds());
+    } else {
+      var start = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+      var end = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+    }
     start.setDate(start.getDate() - 7);
+    update_hash(hash[0] + "-" + hash[1] + "-" + start.getDate() + "." + (start.getMonth() + 1) + "." + start.getFullYear() + "-" + end.getDate() + "." + (end.getMonth() + 1) + "." + end.getFullYear(), true); //Update hash with new dates
   }
   $('#date_start').datepicker("setDate", start);
   $('#date_end').datepicker("setDate", end);
