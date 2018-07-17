@@ -3,7 +3,7 @@ function startpage() {
   .done( function( data ) {
     if (data["error"] == 0) {
       $("#registered_devices").text(data["stats"]["devices"]["count"]);
-      $("#authorization_tokens").text(data["stats"]["authorizations"]["count"]);
+      $("#packets_per_day").text(commafy(data["stats"]["packets"]["per_day"]));
       $("#received_packets").text(commafy(data["stats"]["packets"]["count"]));
       $("#gateways_count").text(data["stats"]["unique_gateways"]["count"]);
     } else {
