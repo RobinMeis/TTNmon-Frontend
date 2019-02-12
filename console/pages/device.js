@@ -25,7 +25,7 @@ function device(hash) {
 }
 
 function get_device_details() {
-  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&pseudonym=" + hash[1], {"dataType": 'json', "timeout": 3000})
+  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&pseudonym=" + hash[1], {"dataType": 'json', "timeout": 10000})
     .done (function( data ) { //Get table data
       if (data["error"] == 0) {
         $("#breadcrumb_pseudonym").remove();
