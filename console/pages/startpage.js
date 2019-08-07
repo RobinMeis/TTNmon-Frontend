@@ -1,5 +1,5 @@
 function startpage() {
-  $.ajax( "https://api.ttnmon.meis.space/api/stats/", {"dataType": 'json', "timeout": 3000})
+  $.ajax( "https://api.beta.ttnmon.meis.space/api/stats/", {"dataType": 'json', "timeout": 3000})
   .done( function( data ) {
     if (data["error"] == 0) {
       $("#registered_devices").text(data["stats"]["devices"]["count"]);

@@ -18,7 +18,7 @@ function load_gateway(dev_pseudonym, gtw_id, date_start, date_end) {
   var string_start = date_start.getFullYear() + "-" + (date_start.getMonth() + 1) + "-" + date_start.getDate();
   var string_end = date_end.getFullYear() + "-" + (date_end.getMonth() + 1) + "-" + date_end.getDate() + " 23:59:59";
 
-  $.ajax( "https://api.ttnmon.meis.space/api/gateway/device/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end + "&gtw_id=" + gtw_id + "&timezone_offset=" + get_timeOffset(), {"dataType": 'json', "timeout": 20000})
+  $.ajax( "https://api.beta.ttnmon.meis.space/api/gateway/device/?dev_pseudonym=" + dev_pseudonym + "&date_start=" + string_start + "&date_end=" + string_end + "&gtw_id=" + gtw_id + "&timezone_offset=" + get_timeOffset(), {"dataType": 'json', "timeout": 20000})
     .done(function(data) {
       var channel = [];
       var snr_series = [];

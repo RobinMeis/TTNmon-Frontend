@@ -49,7 +49,7 @@ class map_page_class {
   }
 
   getGateways(self) {
-    $.ajax( "https://api.ttnmon.meis.space/api/gateway/list/?hide_offline=true", {"dataType": 'json', "timeout": 3000})
+    $.ajax( "https://api.beta.ttnmon.meis.space/api/gateway/list/?hide_offline=true", {"dataType": 'json', "timeout": 3000})
     .done (function( data ) { //Add gateways to map
       var popup_string;
       $.each( data["gateways"], function( key, gateway ) {
@@ -75,7 +75,7 @@ class map_page_class {
   }
 
   getNodes(self) {
-    $.ajax( "https://api.ttnmon.meis.space/api/device/locations/", {"dataType": 'json', "timeout": 3000})
+    $.ajax( "https://api.beta.ttnmon.meis.space/api/device/locations/", {"dataType": 'json', "timeout": 3000})
     .done (function( data ) { //Add nodes to map
       var popup_string;
       var found_node = false;
@@ -116,7 +116,7 @@ class map_page_class {
 
   getLinks(self) {
     if (self.gateways_finished && self.nodes_finished) {
-      $.ajax( "https://api.ttnmon.meis.space/api/links/", {"dataType": 'json', "timeout": 3000})
+      $.ajax( "https://api.beta.ttnmon.meis.space/api/links/", {"dataType": 'json', "timeout": 3000})
       .done (function( data ) { //Add nodes to map
         $.each( data["links"], function( key, link ) {
           if (link["distance"] != null && link["distance"] < 400000) {
