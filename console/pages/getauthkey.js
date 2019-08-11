@@ -1,8 +1,7 @@
 function getauthkey() {
   if (Cookies.get('auth_key') == undefined) { //Create a new key
     $.post( "https://api.beta.ttnmon.meis.space/api/token/")
-    .done (function( data ) {
-      auth_key = $.parseJSON( data );
+    .done (function( auth_key ) {
       $("#auth_key").val(auth_key["auth_token"]);
       Cookies.set('auth_key', auth_key["auth_token"], { expires: 365, path: '' });
       $(".showloggedout").hide();
