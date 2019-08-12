@@ -28,7 +28,10 @@ function signin() { //Runs on each page load
 
 function signin_check(){ //Checks auth key
   $("#spinner").show();
-  $.ajax( "https://api.beta.ttnmon.meis.space/api/device?auth_token=" + $("#auth_key").val(), {"dataType": 'json', "timeout": 3000})
+  $.ajax({url:"https://api.beta.ttnmon.meis.space/api/getDevices",
+  beforeSend: function (xhr) {
+    xhr.setRequestHeader ("Authorization", $("#auth_key").val());
+  }, dataType: 'json', timeout: 3000})
   .done(function( data ) {
     $("#spinner").hide();
     if (data["error"] == 0) {
