@@ -8,19 +8,19 @@ function get_packets(dev_pseudonym, date_start, date_end) {
 }
 
 function updateFrequency(pseudonym, date_start, date_end) {
-  $('#frequency').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + date_end.getTime() + "&var-devPseudonym=" + pseudonym + "&panelId=2");
+  $('#frequency').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + (date_end.getTime() + 86400000) + "&var-devPseudonym=" + pseudonym + "&panelId=2");
 }
 
 function updateSF(pseudonym, date_start, date_end) {
-  $('#SF').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + date_end.getTime() + "&var-devPseudonym=" + pseudonym + "&panelId=8");
+  $('#SF').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + (date_end.getTime() + 86400000) + "&var-devPseudonym=" + pseudonym + "&panelId=8");
 }
 
 function updatePacketCounter(pseudonym, date_start, date_end) {
-  $('#packetCounter').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + date_end.getTime() + "&var-devPseudonym=" + pseudonym + "&panelId=4");
+  $('#packetCounter').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + (date_end.getTime() + 86400000) + "&var-devPseudonym=" + pseudonym + "&panelId=4");
 }
 
 function updateGatewayCount(pseudonym, date_start, date_end) {
-  $('#gatewayCount').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + date_end.getTime() + "&var-devPseudonym=" + pseudonym + "&panelId=6");
+  $('#gatewayCount').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + (date_end.getTime() + 86400000) + "&var-devPseudonym=" + pseudonym + "&panelId=6");
 }
 
 function update_date_button() {
