@@ -1,7 +1,7 @@
 var table = null;
 
 function mydevices() {
-  $.ajax({url:"https://api.beta.ttnmon.meis.space/api/getDevices",
+  $.ajax({url:"https://api.beta.ttnmon.meis.space/v2/devices",
     beforeSend: function (xhr) {
       xhr.setRequestHeader ("Authorization", Cookies.get('auth_key'));
     }, dataType: 'json', timeout: 3000})
