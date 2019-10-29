@@ -5,6 +5,7 @@ function get_packets(dev_pseudonym, date_start, date_end) {
     updateSF(dev_pseudonym, date_start, date_end)
     updatePacketCounter(dev_pseudonym, date_start, date_end)
     updateGatewayCount(dev_pseudonym, date_start, date_end)
+    updatePayloadLength(dev_pseudonym, date_start, date_end)
 }
 
 function updateFrequency(pseudonym, date_start, date_end) {
