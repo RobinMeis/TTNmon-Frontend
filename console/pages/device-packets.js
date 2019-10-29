@@ -23,6 +23,10 @@ function updateGatewayCount(pseudonym, date_start, date_end) {
   $('#gatewayCount').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + (date_end.getTime() + 86400000) + "&var-devPseudonym=" + pseudonym + "&panelId=6");
 }
 
+function updatePayloadLength(pseudonym, date_start, date_end) {
+  $('#payloadLength').attr('src', "https://grafana.ttnmon.meis.space/d-solo/FEa9sNdZk/packet-metadata?orgId=1&from=" + date_start.getTime() + "&to=" + (date_end.getTime() + 86400000) + "&var-devPseudonym=" + pseudonym + "&panelId=10");
+}
+
 function update_date_button() {
   var date_start = $('#date_start').datepicker("getDate");
   var date_end = $('#date_end').datepicker("getDate");
