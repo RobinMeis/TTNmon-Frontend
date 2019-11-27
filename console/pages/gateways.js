@@ -1,7 +1,7 @@
 var table = null;
 
 function gateways() {
-  $.ajax( "https://api.ttnmon.meis.space/api/gateway/list/", {"dataType": 'json', "timeout": 3000})
+  $.ajax( "https://api.beta.ttnmon.meis.space/api/gateway/list/", {"dataType": 'json', "timeout": 3000})
 
   .done (function( data ) { //Get table data
     if (data["error"] == 0) {

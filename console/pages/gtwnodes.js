@@ -9,7 +9,7 @@ function gtwnodes(hash) {
     hash.splice(0,1); //Reassemble gtw_eui
     gtw_eui = hash.join("-");
     $("#gtw_eui").text(gtw_eui);
-    $.ajax( "https://api.ttnmon.meis.space/api/gateway/nodes/?gtw_eui=" + gtw_eui, {"dataType": 'json', "timeout": 3000})
+    $.ajax( "https://api.beta.ttnmon.meis.space/api/gateway/nodes/?gtw_eui=" + gtw_eui, {"dataType": 'json', "timeout": 3000})
 
     .done (function( data ) { //Get table data
       if (data["error"] == 0) {

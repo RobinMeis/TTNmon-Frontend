@@ -18,21 +18,25 @@ function device(hash) {
     $("#maplink").attr("href", "#map-" + hash[1]);
 
     setup_datepickers(date_start, date_end);
-    get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false); //Get packets for (default) date range
     get_device_details();
+    get_packets(hash[1], $('#date_start').datepicker("getDate"), $('#date_end').datepicker("getDate"), false); //Get packets for (default) date range
+
     $("#update_date").click(update_date_button);
   }
 }
 
 function get_device_details() {
-  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key') + "&pseudonym=" + hash[1], {"dataType": 'json', "timeout": 10000})
+  $.ajax( "https://api.beta.ttnmon.meis.space/v2/device/" + hash[1], {"dataType": 'json', "timeout": 10000, beforeSend: function(xhr){xhr.setRequestHeader('Authorization', Cookies.get('auth_key'));},},)
     .done (function( data ) { //Get table data
       if (data["error"] == 0) {
-        $("#breadcrumb_pseudonym").remove();
-        $("#breadcrumb").append('<li class="breadcrumb-item">' + data["app_id"] + '</li><li class="breadcrumb-item active">' + data["dev_id"] + ' <span class="font-weight-light">' + data["deveui"] + "</span></li>");
+        if (data["authorized"]) {
+          $("#breadcrumb_pseudonym").remove();
+          $("#breadcrumb").append('<li class="breadcrumb-item">' + data["device"]["appID"] + '</li><li class="breadcrumb-item active">' + data["device"]["devID"] + ' <span class="font-weight-light">(' + data["device"]["devEUI"] + ")</span></li>");
+        }
       }
-    }
-  );
+    }).fail(function(data) {
+      alert("device not found");
+    });
 }
 
 function setup_datepickers(date_start=null, date_end=null) {

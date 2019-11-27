@@ -21,11 +21,11 @@ $(document).ready(function() {
 });
 
 window.onhashchange = function(){
-  if (update_on_hashchange) parse_url();
+  if (update_on_hashchange == true) parse_url();
 }
 
 function update_hash(new_hash, block) { //Change hash without reloading page
-  if (block) update_on_hashchange = false;
+  if (block == true) update_on_hashchange = false;
 
   setTimeout(function(){
     location.hash = new_hash;
@@ -33,7 +33,7 @@ function update_hash(new_hash, block) { //Change hash without reloading page
   setTimeout(function(){
     update_on_hashchange = true;
     hash = new_hash.split("-");
-  }, 2000);
+  }, 5000);
 }
 
 function parse_url() {

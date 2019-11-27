@@ -1,5 +1,5 @@
 function startpage() {
-  $.ajax( "https://api.ttnmon.meis.space/api/stats/", {"dataType": 'json', "timeout": 3000})
+  $.ajax( "https://api.beta.ttnmon.meis.space/api/stats/", {"dataType": 'json', "timeout": 3000})
   .done( function( data ) {
     if (data["error"] == 0) {
       $("#registered_devices").text(data["stats"]["devices"]["count"]);
@@ -30,7 +30,10 @@ function getBlog() {
   $.each( data, function( key, article ) {
     date = new Date( article["date_gmt"]);
     date_string = ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
-    articles += '<div class="card mb-3"><div class="card-header">' + article["title"]["rendered"] + '</div><div class="card-body">' + article["content"]["rendered"] + '</div><div class="card-footer small text-muted">' + date_string + '</div></div>';
+    articles += '<div class="card mb-3"><div class="card-header">' + article["title"]["rendered"] + '</div><div class="card-body">' + article["excerpt"]["rendered"].replace("[&hellip;]", "...<br><br><a href=\"" + article["link"] + "\" target=\"_blank\">Read more</a>") + '</div><div class="card-footer small text-muted">' + date_string + '</div></div>';
+    if (article["excerpt"]["rendered"] == article["content"]["rendered"]) {
+      alert("no more");
+    }
   });
 
   $("#blog").html(articles);

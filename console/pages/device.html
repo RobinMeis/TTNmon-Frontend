@@ -10,39 +10,28 @@
     <div class="col-lg-9">
       <!-- Graphing -->
       <div class="card mb-3 gtw_graph">
-        <div class="card-header">Gateway RSSI (<span class="gtw_id"></span>)</div>
-        <div class="card-body" id="chart_rssi_gtw">
-        </div>
+        <iframe id="gateway_rssi" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <div class="card mb-3 gtw_graph">
-        <div class="card-header">Gateway SNR (<span class="gtw_id"></span>)</div>
-        <div class="card-body" id="chart_snr_gtw">
-        </div>
+        <iframe id="gateway_snr" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <div class="card mb-3 gtw_graph">
-        <div class="card-header">Gateway Channel (<span class="gtw_id"></span>)</div>
-        <div class="card-body" id="chart_channel_gtw">
-        </div>
+        <iframe id="gateway_channel" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <div class="card mb-3">
-        <div class="card-header">Frequency</div>
-        <div class="card-body" id="chart_frequency">
-        </div>
+        <iframe id="frequency" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <div class="card mb-3">
-        <div class="card-header">Spreading Factor</div>
-        <div class="card-body" id="chart_spreading_factor">
-        </div>
+        <iframe id="SF" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <div class="card mb-3">
-        <div class="card-header">Packet Count</div>
-        <div class="card-body" id="chart_packet_count">
-        </div>
+        <iframe id="packetCounter" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <div class="card mb-3">
-        <div class="card-header">Gateway Count</div>
-        <div class="card-body" id="chart_gateway_count">
-        </div>
+        <iframe id="gatewayCount" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
+      </div>
+      <div class="card mb-3">
+        <iframe id="payloadLength" style="width:100%;" height="400" scrolling="no" frameborder="0"></iframe>
       </div>
       <!-- /Card Columns-->
     </div>
@@ -110,6 +99,24 @@
               </div>
             </div>
           </div>
+          <div class="list-group-item list-group-item-action">
+            <div class="media">
+              <div class="media-body">
+                <strong>RSSI</strong><br>
+                Min: <span id="RSSI_min"></span><br>
+                Max: <span id="RSSI_max"></span>
+              </div>
+            </div>
+          </div>
+          <div class="list-group-item list-group-item-action">
+            <div class="media">
+              <div class="media-body">
+                <strong>SNR</strong><br>
+                Min: <span id="SNR_min"></span><br>
+                Max: <span id="SNR_max"></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Gateways Card-->
@@ -127,7 +134,7 @@
             <div class="media">
               <div class="media-body">
                 <strong>Missing Packets</strong><br>
-                Finds missing packets (Coming soon)
+                Finds missing packets (Coming soon ... maybe ... later)
               </div>
             </div>
           </div>
@@ -135,7 +142,7 @@
             <div class="media">
               <div class="media-body">
                 <strong>Node Reset</strong><br>
-                Finds resets of your node (Coming soon)
+                Finds resets of your node (Coming soon ... maybe ... later)
               </div>
             </div>
           </div>

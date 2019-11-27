@@ -1,12 +1,15 @@
 var table = null;
 
 function mydevices() {
-  $.ajax( "https://api.ttnmon.meis.space/api/device/?auth_token=" + Cookies.get('auth_key'), {"dataType": 'json', "timeout": 3000})
+  $.ajax({url:"https://api.beta.ttnmon.meis.space/v2/devices",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader ("Authorization", Cookies.get('auth_key'));
+    }, dataType: 'json', timeout: 3000})
 
   .done (function( data ) { //Get table data
     if (data["error"] == 0) {
       $.each(data["devices"], function( key, device ) {
-        $("#devTable tbody").append("<tr data-name=\"" + device["dev_id"] + "\" id=\"" + device["deveui"] + "\"><td>" + device["deveui"] + "</td><td>" + device["app_id"] + "</td><td>" + device["dev_id"] + "</td><td>" + device["pseudonym"] + "</td><td>" + device["created"] + "</td><td>" + device["last_seen"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a>&nbsp;&nbsp;&nbsp;<a href=\"#mydevices\" class=\"delButton\"><i class=\"fa fa-trash\"></i></a></td></tr>");
+        $("#devTable tbody").append("<tr data-name=\"" + device["devID"] + "\" id=\"" + device["devEUI"] + "\"><td>" + device["devEUI"] + "</td><td>" + device["appID"] + "</td><td>" + device["devID"] + "</td><td>" + device["pseudonym"] + "</td><td>" + device["created"] + "</td><td>" + device["lastSeen"] + "</td><td style=\"text-align:center;\"><a href=\"#device-" + device["pseudonym"] + "\"><i class=\"fa fa-eye\"></i></a>&nbsp;&nbsp;&nbsp;<a href=\"#mydevices\" class=\"delButton\"><i class=\"fa fa-trash\"></i></a></td></tr>");
       });
 
       table = $("#devTable").DataTable({ //jQuery DataTables
@@ -50,7 +53,10 @@ function remove_item_modal() {
 function remove_item() {
   var table_row = $("#devTable tbody #" + $(this).attr("data-id"));
   $.ajax({
-    url: "https://api.ttnmon.meis.space/api/device/index.php?auth_token=" + Cookies.get('auth_key') + "&deveui=" + table_row.attr("id"),
+    url: "https://api.beta.ttnmon.meis.space/api/device/" + table_row.attr("id"),
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader ("Authorization", Cookies.get('auth_key'));
+    },
     type: "DELETE"
   })
 
