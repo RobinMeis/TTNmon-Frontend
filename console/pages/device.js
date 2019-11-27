@@ -35,7 +35,7 @@ function get_device_details() {
         }
       }
     }).fail(function(data) {
-      //device not found...
+      alert("device not found");
     });
 }
 
