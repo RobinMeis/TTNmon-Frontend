@@ -28,7 +28,7 @@ function signin() { //Runs on each page load
 
 function signin_check(){ //Checks auth key
   $("#spinner").show();
-  $.ajax({url:"https://api.beta.ttnmon.meis.space/api/getDevices",
+  $.ajax({url:"https://api.beta.ttnmon.meis.space/v2/devices",
   beforeSend: function (xhr) {
     xhr.setRequestHeader ("Authorization", $("#auth_key").val());
   }, dataType: 'json', timeout: 3000})

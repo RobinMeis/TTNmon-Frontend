@@ -67,7 +67,7 @@ function updateStatsGateways(pseudonym, date_start, date_end) {
           }
 
           if (gateway["description"] == null) gateway["description"] = ""; //Hide empty descriptions
-          $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gtwID + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gtwID + '</strong><br><span class="font-weight-light">' + gateway["description"] + '</span><br>Packets: ' + gateway["packets"] + '<br>RSSI min: ' + gateway["RSSI"]["min"] + '<br>RSSI max: ' + gateway["RSSI"]["max"] + '<br>SNR min: ' + gateway["SNR"]["min"] + '<br>SNR max: ' + gateway["SNR"]["max"] + coordinates_string + '</div></div></a>');
+          $("#gateways").append('<a class="list-group-item list-group-item-action gateway_select" id="' + gtwID + '" href="' + location.hash + '"><div class="media"><div class="media-body"><strong>' + gtwID + '</strong><br><span class="font-weight-light">' + gateway["description"] + '</span><br>Packets: ' + gateway["packets"] + '<br>Packet Loss: ' + Math.round(gateway["loss"]*10)/10 + '%<br>RSSI min: ' + gateway["RSSI"]["min"] + '<br>RSSI max: ' + gateway["RSSI"]["max"] + '<br>SNR min: ' + gateway["SNR"]["min"] + '<br>SNR max: ' + gateway["SNR"]["max"] + coordinates_string + '</div></div></a>');
         });
         device_gateways();
       }
