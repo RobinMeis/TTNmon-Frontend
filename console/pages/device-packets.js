@@ -30,6 +30,9 @@ function updatePayloadLength(pseudonym, date_start, date_end) {
 }
 
 function updateStatsGateways(pseudonym, date_start, date_end) {
+  date_end.setHours(23);
+  date_end.setMinutes(59);
+  date_end.setSeconds(59);
   $.ajax( "https://api.ttnmon.meis.space/v2/metadata/device/" + hash[1] + "/packets/" + date_start.toISOString() + "/" + date_end.toISOString(), {"dataType": 'json', "timeout": 10000},)
     .done (function( data ) { //Get table data
       if (data["error"] == 0) {
@@ -71,6 +74,10 @@ function updateStatsGateways(pseudonym, date_start, date_end) {
     }).fail(function(data) {
       alert("Failed to fetch statistic. Some data and gateway information are unavailable");
     });
+
+  date_end.setHours(0);
+  date_end.setMinutes(0);
+  date_end.setSeconds(0);
 }
 
 function update_date_button() {
