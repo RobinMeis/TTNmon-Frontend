@@ -57,11 +57,22 @@
             <span class="nav-link-text">Startpage</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Map">
+        <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Map">
           <a class="nav-link" href="#map" id="startpage">
             <i class="fa fa-fw fa-map"></i>
             <span class="nav-link-text">Map</span>
           </a>
+        </li> --!>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Maps">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-map"></i>
+            <span class="nav-link-text">Maps</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li><a href="#geo_node_packet_count">Node packet count</a></li>
+            <li><a href="#geo_gateway_packet_count">Gateway packet count</a></li>
+            <li><a href="#geo_gateway_distance">Gateway maximum distance</a></li>
+          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Gateways">
           <a class="nav-link" href="#gateways">

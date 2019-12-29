@@ -11,5 +11,8 @@
   "#dumps": {"javascript": "dumps", "html": "pages/dumps.html"},
   "#gateways": {"javascript": "gateways", "html": "pages/gateways.html"},
   "#gtwnodes": {"javascript": "gtwnodes", "html": "pages/gtwnodes.html"},
-  "#platform_stats": {"javascript": "faq", "html": "pages/platform_stats.html"}
+  "#platform_stats": {"javascript": "faq", "html": "pages/platform_stats.html"},
+  "#geo_node_packet_count": {"javascript": "faq", "html": "pages/geo_node_packet_count.html"},
+  "#geo_gateway_packet_count": {"javascript": "faq", "html": "pages/geo_gateway_packet_count.html"},
+  "#geo_gateway_distance": {"javascript": "faq", "html": "pages/geo_gateway_distance.html"}
 }
